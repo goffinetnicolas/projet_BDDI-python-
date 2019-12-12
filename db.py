@@ -1,22 +1,27 @@
 import sqlite3
 
 class DataBase:
-    def __init__(self, db):
-        dep=[]
-        con = sqlite3.connect('putDataBaseHere/chinook.db')
-        c = con.cursor()
+    def __init__(self, dbName):
+        self.dbName = dbName
+        self.depTab=[]
+        self.connection = sqlite3.connect('putDataBaseHere/' + dbName)
+        self.command = self.connection.cursor()
 
         try:
-            c.execute("""SELECT * FROM FuncDep""")
-            a=c.fetchall()
-            print(a)
+            self.command.execute("""SELECT * FROM FuncDep""")
         except:
-            c.execute("""CREATE TABLE FuncDep ()""")
+            self.command.execute("""CREATE TABLE FuncDep (table_name VARCHAR, lhs VARCHAR, rhs VARCHAR)""")
 
-        self.db=db
+
+    def addDep(self, depObject):
+        table_name = depObject.table_name
+        lhs = depObject.lhs
+        rhs = depObject.rhs
+        self.depTab.append(depObject)
+        self.command.execute("""INSERT INTO FuncDep VALUES ("""+table_name+""","""+lhs+""","""+rhs+""")""")
 
     def __str__(self):
-        print(self.db)
+        print(self.dbName)
 
 
 

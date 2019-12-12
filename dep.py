@@ -1,9 +1,9 @@
 class Dep:
-    def __init__(self, table_name, lhs, rhs, db):
+    def __init__(self, dbName, table_name, lhs, rhs):
         self.table_name=table_name
         self.lhs=lhs
         self.rhs=rhs
-        self.db=db
+        self.db=dbName
 
     def __str__(self):
         self.db.__str__()

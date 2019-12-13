@@ -33,6 +33,27 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="projet_BDDI-python-" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="projet_BDDI-python-" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,6 +99,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.db" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -119,47 +141,59 @@
       <option name="project" value="LOCAL" />
       <updated>1576187569187</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="adding comments in code">
+      <created>1576237201224</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576237201224</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding dep class, db class and functions" />
     <MESSAGE value="fixing errors, working on dep" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing errors, working on dep" />
+    <MESSAGE value="adding comments in code" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding comments in code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576169846381">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576169846381" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576187568175">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576237200284">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576187568175" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576237200284" />
+    <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576237166195" />
     <state x="739" y="261" key="FileChooserDialogImpl" timestamp="1576184030573">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576184030573" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576187678034">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576256570797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576187678034" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576187678034">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576256570797" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576256570796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576187678034" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576187678034">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576256570796" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576256570796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576187678034" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576187678034">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576256570796" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576256570797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576187678034" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576187600877">
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576256570797" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576256594234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576187600877" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576256594234" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576235285216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

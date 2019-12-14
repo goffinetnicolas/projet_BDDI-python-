@@ -1,4 +1,4 @@
-import cmd, sys
+import cmd
 
 from db import DataBase
 from dep import Dep
@@ -51,41 +51,42 @@ class Shell(cmd.Cmd):
          It creates a new Dep object with the arguments indicated,
          the Dep object is added to the depTab list in the current DataBase object"""
 
-        argTab = arg.split()
+        arg_tab=sep(arg)
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-        else:
-            new_dep_object = Dep(self.db_object.db_name, argTab[0], argTab[1], argTab[2])
-            self.db_object.addDep(new_dep_object)
-            print("New functional dependency added")
-            new_dep_object.__str__()
-
-    def do_removeDep(self, arg):
-
-        """ Remove the functional dependency indicated from the data base file"""
-
-        arg_tab = arg.split()
-        if (self.db_object == None):
-            print("Error, you must connect a data base file")
-        if (arg_tab == []):
+        if (len(arg_tab) < 3):
             print("Error, you must type 3 arguments (table_name, lhs, rhs)")
         else:
-            table_name_arg = arg_tab[0]
-            lhs_arg = arg_tab[1]
-            rhs_arg = arg_tab[2]
+            new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
+            self.db_object.addDep(new_dep_object)
 
-            compare_dep = Dep(self.db_object, table_name_arg, lhs_arg, rhs_arg)
+    def do_removeDep(self, arg):  # first argument is table name, second is lhs and third is rhs
+
+        """ The user type 'removeDep [table_name] [lhs] [rhs]' to remove the functional dependency indicated,
+         the Dep object is removed from the depTab list in the current DataBase object"""
+
+        arg_tab=sep(arg)
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+        if (len(arg_tab) < 3):
+            print("Error, you must type 3 arguments (table_name, lhs, rhs)")
+        else:
+            compare_dep = Dep(self.db_object, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.removeDep(compare_dep)
 
     def do_showDep(self, arg):
 
         """Show the current functional dependency in the data base file"""
 
-        list = self.db_object.depTab
-        if (list == []):
-            print("There is no functional dependencies yet")
-        for i in list:
-            i.__str__()
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+        else:
+            l = self.db_object.depTab
+            if (l == []):
+                print("There is no functional dependencies yet, "
+                      "you can add them with the command 'addDep [table_name] [lhs] [rhs]'")
+            for i in l:
+                print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
 
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
@@ -117,6 +118,44 @@ class Shell(cmd.Cmd):
         """ Compute and show the super-key(s) of the functional dependencies """
 
 
+def sep(arg):
+    res = []
+    lhs=[]
+    a=""
+    b=""
+    c=0
+    lhs_mode=False
+    for i in arg:
+        c=c+1
+        if (i == ' ' and lhs_mode==False and a != ""):
+            res.append(a)
+            a=""
+
+        if(i == '{'):
+            lhs_mode=True
+
+        if(i== '}'):
+            lhs.append(b)
+            lhs_mode=False
+            res.append(lhs)
+
+        if(lhs_mode==True):
+            if(i==','):
+                lhs.append(b)
+                b=""
+            if(i==' ' or i=='{'):
+                pass
+            else:
+                if(i != ','):
+                    b=b+i
+        else:
+            if(i != '}' and i != ' '):
+                a=a+i
+            if(c==len(arg)):
+                res.append(a)
+                a = ""
+
+    return res
 
 if __name__ == '__main__':
     Shell().cmdloop()

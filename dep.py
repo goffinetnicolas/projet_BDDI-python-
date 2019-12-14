@@ -3,18 +3,60 @@ class Dep:
         """ Represent a functional dependency """
 
         self.table_name = table_name
-        self.lhs = lhs
+        self.lhs = lhs # lhs is a list of attribute or a single String attribute
+        self.lhs_rep = rep(lhs)
         self.rhs = rhs
-        self.db = dbname
+        self.dbname = dbname
 
     def __eq__(self, other):
         if not isinstance(other, Dep):
             return NotImplemented
+        stn = self.table_name.lower()  # all the dependencies name are in lowercase to avoid multiple identical objects
+        otn = other.table_name.lower()
+        srhs = self.rhs.lower()
+        orhs = other.rhs.lower()
 
-        return self.table_name == other.table_name and self.lhs == other.lhs and self.rhs == other.rhs
+        if(isinstance(self.lhs, list)):
+            sl = self.lhs
+            ol = other.lhs
+            return stn == otn and compare_list(sl,ol) and srhs == orhs
+        else:
+            sl = self.lhs.lower()
+            ol = other.lhs.lower()
+            return stn == otn and sl == ol and srhs == orhs
 
     def __str__(self):
-        self.db.__str__()
-        print("data_base: "+self.db.__str__())
+        print("data_base: ", self.dbname)
         print("table: ", self.table_name)
-        print("Dep: ", self.lhs, " --> ", self.rhs + "\n")
+        print("Dep: ", self.lhs_rep, " --> ", self.rhs , "\n")
+
+def compare_list(a,b):
+    c1=[]
+    c2=[]
+    a.sort()
+    b.sort()
+    for i in a:
+        c1.append(i.lower())
+    for e in b:
+        c2.append(e.lower())
+    return c1 == c2
+
+def rep(lhs):
+    if(isinstance(lhs, str)):
+        return lhs
+    s="{"
+    c=0
+    for i in lhs:
+        if(c != len(lhs)-1):
+            s = s+i
+            s=s+", "
+            c = c+1
+        else:
+            s=s+i
+            s=s+"}"
+    return s
+
+
+
+
+

@@ -32,7 +32,10 @@ def sep(arg): # "table {lhs1  ,lhs2, lhs3,lhs4, lhs5} rhs"
         if(i== '}'):
             lhs.append(b)
             lhs_mode=False
-            res.append(lhs)
+            if(len(lhs)==1):
+                res.append(lhs[0])
+            else:
+                res.append(lhs)
 
         if(lhs_mode==True):
             if(i==','):
@@ -49,8 +52,12 @@ def sep(arg): # "table {lhs1  ,lhs2, lhs3,lhs4, lhs5} rhs"
             if(c==len(arg)):
                 res.append(a)
                 a = ""
-
     return res
+
+a="table_name  {lhs1}   rhs"
+b="table_name  {lhs1,   lhs2, lhs3  ,    lhs4}   rhs"
+
+print(sep(a), sep(b))
 
 def rep(lhs):
     if(isinstance(lhs, str)):
@@ -67,7 +74,22 @@ def rep(lhs):
             s=s+"}"
     return s
 
-a="test test test"
-a=sep(a)
-print(a)
-print(a[1])
+def compare_list(a,b):
+    c1=[]
+    c2=[]
+    a.sort()
+    b.sort()
+    for i in a:
+        c1.append(i.lower())
+    for e in b:
+        c2.append(e.lower())
+    return c1 == c2
+
+def insert(s): # s = "lol lal lil lul"
+    res=""
+    a=s.split()
+    for i in a:
+        res=res + i +" "
+    return res[:len(res)-1]
+
+

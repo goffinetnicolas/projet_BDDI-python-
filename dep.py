@@ -3,24 +3,31 @@ class Dep:
         """ Represent a functional dependency """
 
         self.table_name = table_name
-        self.lhs = lhs # lhs is a list of attribute or a single String attribute
-        self.lhs_rep = rep(lhs)
+        self.lhs = lhs  # lhs is a list of attribute or a string attribute depending on what the user has typed
+        self.lhs_rep = rep(lhs)  # String representation of the lhs part
         self.rhs = rhs
         self.dbname = dbname
 
     def __eq__(self, other):
         if not isinstance(other, Dep):
             return NotImplemented
+
         stn = self.table_name.lower()  # all the dependencies name are in lowercase to avoid multiple identical objects
         otn = other.table_name.lower()
         srhs = self.rhs.lower()
         orhs = other.rhs.lower()
 
-        if(isinstance(self.lhs, list)):
+        if(isinstance(self.lhs, list) and isinstance(other.lhs, list)): # list of lhs comparing to list of lhs
             sl = self.lhs
             ol = other.lhs
-            return stn == otn and compare_list(sl,ol) and srhs == orhs
-        else:
+            return stn == otn and compare_list(sl, ol) and srhs == orhs
+        if(isinstance(self.lhs, str) and isinstance(other.lhs, list)): # single lhs comparing to list of lhs
+            return False
+
+        if(isinstance(self.lhs, list) and isinstance(other.lhs, str)): # list of lhs comparing to single lhs
+            return False
+
+        else: # single lhs comparing to single lhs
             sl = self.lhs.lower()
             ol = other.lhs.lower()
             return stn == otn and sl == ol and srhs == orhs

@@ -7,7 +7,7 @@ from dep import Dep
 class Shell(cmd.Cmd):
     """ Displayed shell when the program starts, The user can type different commands described below """
 
-    intro = 'Welcome to the data base I project shell.   Type help or ? to list commands.\n'
+    intro = 'Welcome to the functional dependencies shell.   Type help or ? to list commands.\n'
     prompt = 'Type a command >>> '
     db_object = None
 
@@ -29,9 +29,13 @@ class Shell(cmd.Cmd):
         """ The user type 'connect [data base file]' to create a DataBase object connected with the file indicated """
 
         if (arg == ""):
+            print("")  # space
             print("please, enter a data base file")
+            print("")  # space
             return False
+        print("")  # space
         print("connected to " + arg)
+        print("")  # space
         newDB = DataBase(arg)
         self.db_object = newDB
 
@@ -40,9 +44,13 @@ class Shell(cmd.Cmd):
         """The user type 'disconnect' to remove the data base file connected"""
 
         if (self.db_object == None):
+            print("")  # space
             print("Error, no data base file connected")
+            print("")  # space
         else:
+            print("")  # space
             print("Disconnected to " + self.db_object.db_name)
+            print("")  # space
             self.db_object = None
 
     def do_addDep(self, arg):  # first argument is table name, second is lhs and third is rhs
@@ -51,11 +59,16 @@ class Shell(cmd.Cmd):
          It creates a new Dep object with the arguments indicated,
          the Dep object is added to the depTab list in the current DataBase object"""
 
-        arg_tab=sep(arg)
+        arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
+
         if (self.db_object == None):
+            print("")  # space
             print("Error, you must connect a data base file")
-        if (len(arg_tab) < 3):
+            print("")  # space
+        if (len(arg_tab[1]) < 2):
+            print("")  # space
             print("Error, you must type 3 arguments (table_name, lhs, rhs)")
+            print("")  # space
         else:
             new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.addDep(new_dep_object)
@@ -67,12 +80,24 @@ class Shell(cmd.Cmd):
 
         arg_tab=sep(arg)
         if (self.db_object == None):
+            print("")  # space
             print("Error, you must connect a data base file")
+            print("")  # space
         if (len(arg_tab) < 3):
+            print("")  # space
             print("Error, you must type 3 arguments (table_name, lhs, rhs)")
+            print("")  # space
         else:
             compare_dep = Dep(self.db_object, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.removeDep(compare_dep)
+
+    def do_removeAllDep(self, arg):
+        if (self.db_object == None):
+            print("")  # space
+            print("Error, you must connect a data base file")
+            print("")  # space
+        for i in self.db_object.depTab:
+            self.db_object.removeDep(i)
 
     def do_showDep(self, arg):
 
@@ -81,12 +106,14 @@ class Shell(cmd.Cmd):
         if (self.db_object == None):
             print("Error, you must connect a data base file")
         else:
+            print("")  # space
             l = self.db_object.depTab
             if (l == []):
                 print("There is no functional dependencies yet, "
                       "you can add them with the command 'addDep [table_name] [lhs] [rhs]'")
             for i in l:
                 print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
+            print("")  # space
 
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
@@ -137,7 +164,10 @@ def sep(arg):
         if(i== '}'):
             lhs.append(b)
             lhs_mode=False
-            res.append(lhs)
+            if (len(lhs) == 1):
+                res.append(lhs[0])
+            else:
+                res.append(lhs)
 
         if(lhs_mode==True):
             if(i==','):

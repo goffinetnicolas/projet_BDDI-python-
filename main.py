@@ -10,6 +10,7 @@ class Shell(cmd.Cmd):
     intro = 'Welcome to the functional dependencies shell.   Type help or ? to list commands.\n'
     prompt = 'Type a command >>> '
     db_object = None
+    tabNSD=[] 
 
     def do_exit(self, arg):
 
@@ -118,6 +119,34 @@ class Shell(cmd.Cmd):
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
         """ Compute and show the not satisfied functional dependencies """
+       # tabNSD=[]
+        list = self.db_object.depTab
+        tabD=[]
+        tabG=[]
+        #On considere qu'on ne selectionne que un attribut à gauche !!!
+        for i in list:
+            i.__str__()
+            attribute1=str(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
+            attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
+            name=str(self.db_object.db_name)
+            self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name) #on considere qu'il n'y a que un attribut pour le moment
+            tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
+            self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name)
+            tabG=self.db_object.command.fetchall() 
+            # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
+            l=0
+            while (l<len(tabG)):
+                if (tabG[l]!=tabD[l]):
+                    tabNSD.append(i)
+                    l=len(tabG) #pour sortir de cette boucle et passer à la DF suivante 
+                l=l+1   
+        self.showNSD() 
+    
+    def showNSD(self,arg):
+        print("It's the not satisfied functional dependencies")
+        for m in tabNSD:
+            print(m)
+            
 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 

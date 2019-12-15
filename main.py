@@ -142,7 +142,10 @@ class Shell(cmd.Cmd):
                 if (k in tabDf and tabDf[k]!=tabD[l]):
                     self.tabNSD.append(i)
                     l=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
-                l=l+1        
+                l=l+1  
+            tabD=[]
+            tabG=[]
+            tabDf={}       
             #pas oublier de vider les tableaux et le dico    
 
         print("It's the not satisfied functional dependencies")

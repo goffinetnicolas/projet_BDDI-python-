@@ -33,7 +33,15 @@ def remplire(d,t,v):
 t1=["un","deux","trois"]
 t2=[1,2,3]
 d={}
-print(remplire(d,t1,t2))    
+remplire(d,t1,t2)
+print(t1)
+t1=[]
+print(t1) 
+print(d)
+d={}
+print(d)   
+
+
 '''
 def sep(arg): # "table {lhs1  ,lhs2, lhs3,lhs4, lhs5} rhs"
     res = [] # [table,]

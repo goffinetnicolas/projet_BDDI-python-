@@ -39,7 +39,7 @@ t1=[]
 print(t1) 
 print(d)
 d={}
-print(d)   
+print(len(t1)==0)   
 
 
 '''

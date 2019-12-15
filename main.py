@@ -125,7 +125,7 @@ class Shell(cmd.Cmd):
         #On considere qu'on ne selectionne que un attribut à gauche !!!
         for i in list:
             i.__str__()
-            attribute1=str(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
+            attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
             attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
             name=str(self.db_object.db_name)
             self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name) #on considere qu'il n'y a que un attribut pour le moment
@@ -211,6 +211,14 @@ def sep(arg):
                 a = ""
 
     return res
+
+def argAttribute(a):
+        x=len(a)
+        res=""+str(a[0])
+        if(len(a)>1):
+            for i in range(1,x):
+                res=res+', '+str(a[i])
+        return res       
 
 if __name__ == '__main__':
     Shell().cmdloop()

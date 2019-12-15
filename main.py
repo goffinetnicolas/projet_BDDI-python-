@@ -126,17 +126,19 @@ class Shell(cmd.Cmd):
         self.dejafaitNSD=1
         tabD=[]
         tabG=[]
+        self.tabNSD=[]
         tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite 
         #On considere qu'on ne selectionne que un attribut à gauche !!!
         arg_tab=sep(arg)
         if (len(l)==0):
             print("There is no functional dependencies")
         else:   
+            r=0 #pour ne toucher que les df qui concerne la table 
             for i in l:
                 if i.table_name==arg_tab[0]:
                     i.__str__()
-                    attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
-                    attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
+                    attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche 
+                    attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche 
                     self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
                     tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
                     self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
@@ -151,6 +153,7 @@ class Shell(cmd.Cmd):
                             self.tabNSD.append(i)
                             z=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
                         z=z+1  
+                r=r+1        
                 tabD=[]
                 tabG=[]
                 tabDf={}       
@@ -158,14 +161,17 @@ class Shell(cmd.Cmd):
             print("It's the not satisfied functional dependencies")
             for m in self.tabNSD:
                 print(m)
+                return self.tabNSD
 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
-        """ Compute and show the functional dependencies that are a logical consequence """
+        """ Compute and show the functional dependencies that are a logical consequence 
+        The user type 'showLCD [table_name]'"""
         #Il faut que showNSD ait ete effectue avant de faire ça 
+        arg_tab=sep(arg) #c'est le nom de la table dans la base de données
         if(self.dejafaitNSD==1):
             l=self.db_object.depTab
-            supelem(l,self.tabNSD)
+            supelem(l,self.tabNSD) 
             print("The logical consequence dependencies are : \n")
             for m in l:
                 print(m)
@@ -260,7 +266,6 @@ def supelem(lp,eli):
         if (lp[i] in eli):
             lp.pop(i)
             i=i-1
-        print(lp[i] in eli)
         i=i+1
     return lp
 #pour supprimer les elements de eli dans lp            

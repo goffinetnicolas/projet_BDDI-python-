@@ -29,8 +29,8 @@ def remplire(d,t,v):
         d[x]=v[i]
     return d
 
-t1=["un","deux","trois"]
-t2=["deux","trois"]
+t2=["un","deux","trois"]
+t1=["deux","trois"]
 '''d={}
 remplire(d,t1,t2)
 print(t1)
@@ -42,10 +42,10 @@ print(len(t1)==0)  '''
 def findIndice(lp,eli):
     i=0
     while(i<len(lp)):
+        print(i)
         if (lp[i] in eli):
             lp.pop(i)
             i=i-1
-        print(lp[i] in eli)
         i=i+1
     return lp
 

@@ -43,6 +43,7 @@ class DataBase:
                 for i in self.depTab:
                     if(dep_object.__eq__(i)):
                         print("Error, the functional dependency already exists")
+                        print("")  # space
                         return 0 # we don't want to execute the rest of the function
 
 
@@ -64,6 +65,8 @@ class DataBase:
             except Exception as e:
                 print(e)
                 print("Error, the attribute(s) or the table indicated do not exist")
+                print("")  # space
+
 
         else:
             try:
@@ -87,6 +90,8 @@ class DataBase:
             except Exception as e:
                 print(e)
                 print("Error, the attribute(s) or the table indicated do not exist")
+                print("")  # space
+
 
     def removeDep(self, dep_object):
 

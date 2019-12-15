@@ -136,15 +136,13 @@ class Shell(cmd.Cmd):
             l=0
             while (l<len(tabG)):
                 if (tabG[l]!=tabD[l]):
-                    tabNSD.append(i)
+                    self.tabNSD.append(i)
                     l=len(tabG) #pour sortir de cette boucle et passer à la DF suivante 
-                l=l+1   
-       self.showNSD()         
-                
-    def showNSD(self,arg):
+                l=l+1
+
         print("It's the not satisfied functional dependencies")
-        for m in tabNSD:
-            print(m)     
+        for m in self.tabNSD:
+                print(m)
 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 

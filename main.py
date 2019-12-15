@@ -10,7 +10,9 @@ class Shell(cmd.Cmd):
     intro = 'Welcome to the functional dependencies shell.   Type help or ? to list commands.\n'
     prompt = 'Type a command >>> '
     db_object = None
-    tabNSD=[]
+    tabNSD=[] #table ou il y a les df qui ne sont pas satisafite 
+    dejafaitNSD=0 #pour savoir si on a déja fait une methode 
+    #Il faudrait que tabNSD soit propre a chauqe table ou que les tables n'aient pas les mêmes attributs sino il y a un risque d'erreurs 
 
     def do_exit(self, arg):
 
@@ -118,12 +120,15 @@ class Shell(cmd.Cmd):
 
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
-        """ Compute and show the not satisfied functional dependencies """
+        """ Compute and show the not satisfied functional dependencies 
+        The user type 'showNSD [table_name]' """
         l = self.db_object.depTab
+        self.dejafaitNSD=1
         tabD=[]
         tabG=[]
         tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite 
         #On considere qu'on ne selectionne que un attribut à gauche !!!
+        arg_tab=sep(arg)
         if (len(l)==0):
             print("There is no functional dependencies")
         else:   
@@ -131,10 +136,9 @@ class Shell(cmd.Cmd):
                 i.__str__()
                 attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
                 attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
-                name=str(self.db_object.db_name)
-                self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +name) #on considere qu'il n'y a que un attribut pour le moment
+                self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
                 tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
-                self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name)
+                self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
                 tabG=self.db_object.command.fetchall() 
                 # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
                 z=0
@@ -157,6 +161,19 @@ class Shell(cmd.Cmd):
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
         """ Compute and show the functional dependencies that are a logical consequence """
+        #Il faut que showNSD ait ete effectue avant de faire ça 
+        if(self.dejafaitNSD==1):
+            l=self.db_object.depTab
+            supelem(l,self.tabNSD)
+            print("The logical consequence dependencies are : \n")
+            for m in l:
+                print(m)
+        else:
+            print("You must do 'showNSD' before")        
+
+
+
+
 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 
@@ -234,7 +251,19 @@ def argAttribute(a):
     for i in range(len(t)):
         x=t[i]
         d[x]=v[i]
-    return d   '''         
+    return d   '''    
+
+def supelem(lp,eli):
+    i=0
+    while(i<len(lp)):
+        if (lp[i] in eli):
+            lp.pop(i)
+            i=i-1
+        print(lp[i] in eli)
+        i=i+1
+    return lp
+#pour supprimer les elements de eli dans lp            
+
 
 if __name__ == '__main__':
     Shell().cmdloop()

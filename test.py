@@ -22,7 +22,6 @@ def test():
     print(dico)    
     return t    
 
-print(test())
 
 def remplire(d,t,v):
     for i in range(len(t)):
@@ -31,15 +30,28 @@ def remplire(d,t,v):
     return d
 
 t1=["un","deux","trois"]
-t2=[1,2,3]
-d={}
+t2=["deux","trois"]
+'''d={}
 remplire(d,t1,t2)
 print(t1)
 t1=[]
 print(t1) 
 print(d)
 d={}
-print(len(t1)==0)   
+print(len(t1)==0)  ''' 
+def findIndice(lp,eli):
+    i=0
+    while(i<len(lp)):
+        if (lp[i] in eli):
+            lp.pop(i)
+            i=i-1
+        print(lp[i] in eli)
+        i=i+1
+    return lp
+
+  
+print(findIndice(t1,t2))
+
 
 
 '''

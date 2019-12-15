@@ -68,10 +68,15 @@ class Shell(cmd.Cmd):
             print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
-        if (len(arg_tab[1]) < 2):
+        if (len(arg_tab) < 3):
             print("")  # space
-            print("Error, you must type 3 arguments (table_name, lhs, rhs)")
+            print("Error, you must type 3 arguments (table_name, lhs or {lhs1,lhs2,...}, rhs)")
             print("")  # space
+        if (not_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
+            print("")  # space
+            print("Error, you have types 2 identical attributes in lhs")
+            print("")  # space
+
         else:
             new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.addDep(new_dep_object)
@@ -120,8 +125,9 @@ class Shell(cmd.Cmd):
 
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
-        """ Compute and show the not satisfied functional dependencies 
+        """ Compute and show the not satisfied functional dependencies
         The user type 'showNSD [table_name]' """
+
         l = self.db_object.depTab
         arg_tab=sep(arg)
         self.dejafaitNSD=1
@@ -129,36 +135,36 @@ class Shell(cmd.Cmd):
         tabG=[]
         self.tabNSD=[]
         self.tabNSD[0]=str(arg_tab[0])
-        tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite 
+        tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite
         #On considere qu'on ne selectionne que un attribut à gauche !!!
         if (len(l)==0):
             print("There is no functional dependencies")
-        else:   
-            r=0 #pour ne toucher que les df qui concerne la table 
+        else:
+            r=0 #pour ne toucher que les df qui concerne la table
             for i in l:
                 if i.table_name==arg_tab[0]:
                     i.__str__()
-                    attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche 
-                    attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche 
+                    attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche
+                    attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche
                     self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
-                    tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
+                    tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux
                     self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
-                    tabG=self.db_object.command.fetchall() 
-                    # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
+                    tabG=self.db_object.command.fetchall()
+                    # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte
                     z=0
-                    while (z<len(tabG)): 
+                    while (z<len(tabG)):
                         k=tabG[z]
-                        if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute 
+                        if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
                             tabDf[k]=tabD[z]
                         if (k in tabDf and tabDf[k]!=tabD[z]):
                             self.tabNSD.append(i)
-                            z=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
-                        z=z+1  
-                r=r+1        
+                            z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
+                        z=z+1
+                r=r+1
                 tabD=[]
                 tabG=[]
-                tabDf={}       
-                #pas oublier de vider les tableaux et le dico    
+                tabDf={}
+                #pas oublier de vider les tableaux et le dico
             print("It's the not satisfied functional dependencies")
             for m in self.tabNSD:
                 print(m)
@@ -249,6 +255,17 @@ def sep(arg):
                 a = ""
 
     return res
+
+def not_recurrent_lhs(tab):
+    c=0
+    for i in tab:
+        for e in tab:
+            if i == e:
+                c=c+1
+        if(c>1):
+            return False
+        c=0
+    return True
 
 def argAttribute(a):
         x=len(a)

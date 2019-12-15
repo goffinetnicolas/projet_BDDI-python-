@@ -122,6 +122,7 @@ class Shell(cmd.Cmd):
         list = self.db_object.depTab
         tabD=[]
         tabG=[]
+        tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite 
         #On considere qu'on ne selectionne que un attribut à gauche !!!
         for i in list:
             i.__str__()
@@ -134,15 +135,19 @@ class Shell(cmd.Cmd):
             tabG=self.db_object.command.fetchall() 
             # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
             l=0
-            while (l<len(tabG)):
-                if (tabG[l]!=tabD[l]):
+            while (l<len(tabG)): 
+                k=tabG[l]
+                if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute 
+                    tabDf[k]=tabD[l]
+                if (k in tabDf and tabDf[k]!=tabD[l]):
                     self.tabNSD.append(i)
-                    l=len(tabG) #pour sortir de cette boucle et passer à la DF suivante 
-                l=l+1
+                    l=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
+                l=l+1        
+            #pas oublier de vider les tableaux et le dico    
 
         print("It's the not satisfied functional dependencies")
         for m in self.tabNSD:
-                print(m)
+            print(m)
 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
@@ -219,6 +224,12 @@ def argAttribute(a):
             for i in range(1,x):
                 res=res+', '+str(a[i])
         return res       
+
+'''def remplire(d,t,v) # le t c'est les clef et v les valeurs 
+    for i in range(len(t)):
+        x=t[i]
+        d[x]=v[i]
+    return d   '''         
 
 if __name__ == '__main__':
     Shell().cmdloop()

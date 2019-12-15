@@ -6,13 +6,35 @@ c = con.cursor()
 
 c.execute("""SELECT Title,ArtistId FROM albums""")
 
-#print(c.fetchall())
+print(c.fetchall())
 
 con.commit()
 
 con.close()
 
+def test():
+    dico={"a":1}
+    t=[]
+    z="a"
+    b=2
+    if (z in dico and dico[z]!=b ):
+        t.append(z)
+    print(dico)    
+    return t    
 
+print(test())
+
+def remplire(d,t,v):
+    for i in range(len(t)):
+        x=t[i]
+        d[x]=v[i]
+    return d
+
+t1=["un","deux","trois"]
+t2=[1,2,3]
+d={}
+print(remplire(d,t1,t2))    
+'''
 def sep(arg): # "table {lhs1  ,lhs2, lhs3,lhs4, lhs5} rhs"
     res = [] # [table,]
     lhs=[] #
@@ -90,6 +112,6 @@ def insert(s): # s = "lol lal lil lul"
     a=s.split()
     for i in a:
         res=res + i +" "
-    return res[:len(res)-1]
+    return res[:len(res)-1]'''
 
 

@@ -133,27 +133,28 @@ class Shell(cmd.Cmd):
             print("There is no functional dependencies")
         else:   
             for i in l:
-                i.__str__()
-                attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
-                attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
-                self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
-                tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
-                self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
-                tabG=self.db_object.command.fetchall() 
-                # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
-                z=0
-                while (z<len(tabG)): 
-                    k=tabG[z]
-                    if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute 
-                        tabDf[k]=tabD[z]
-                    if (k in tabDf and tabDf[k]!=tabD[z]):
-                        self.tabNSD.append(i)
-                        z=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
-                    z=z+1  
+                if i.table_name==arg_tab[0]:
+                    i.__str__()
+                    attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
+                    attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
+                    self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
+                    tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
+                    self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
+                    tabG=self.db_object.command.fetchall() 
+                    # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte  
+                    z=0
+                    while (z<len(tabG)): 
+                        k=tabG[z]
+                        if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute 
+                            tabDf[k]=tabD[z]
+                        if (k in tabDf and tabDf[k]!=tabD[z]):
+                            self.tabNSD.append(i)
+                            z=len(tabG) #pour sortir de la boucle et passer à la Df suivante 
+                        z=z+1  
                 tabD=[]
                 tabG=[]
                 tabDf={}       
-            #pas oublier de vider les tableaux et le dico    
+                #pas oublier de vider les tableaux et le dico    
             print("It's the not satisfied functional dependencies")
             for m in self.tabNSD:
                 print(m)

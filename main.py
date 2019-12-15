@@ -128,7 +128,7 @@ class Shell(cmd.Cmd):
             attribute1=argAttribute(self.db_object.depTab.lhs) #le nom de l'attribut à gauche de la fléche 
             attribute2=str(self.db_object.depTab.rhs) #le nom de l'attribut à droite de la flèche 
             name=str(self.db_object.db_name)
-            self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name) #on considere qu'il n'y a que un attribut pour le moment
+            self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +name) #on considere qu'il n'y a que un attribut pour le moment
             tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux 
             self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +name)
             tabG=self.db_object.command.fetchall() 

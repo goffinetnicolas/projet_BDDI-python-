@@ -123,13 +123,14 @@ class Shell(cmd.Cmd):
         """ Compute and show the not satisfied functional dependencies 
         The user type 'showNSD [table_name]' """
         l = self.db_object.depTab
+        arg_tab=sep(arg)
         self.dejafaitNSD=1
         tabD=[]
         tabG=[]
         self.tabNSD=[]
+        self.tabNSD[0]=str(arg_tab[0])
         tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite 
         #On considere qu'on ne selectionne que un attribut à gauche !!!
-        arg_tab=sep(arg)
         if (len(l)==0):
             print("There is no functional dependencies")
         else:   
@@ -169,14 +170,17 @@ class Shell(cmd.Cmd):
         The user type 'showLCD [table_name]'"""
         #Il faut que showNSD ait ete effectue avant de faire ça 
         arg_tab=sep(arg) #c'est le nom de la table dans la base de données
-        if(self.dejafaitNSD==1):
-            l=self.db_object.depTab
-            supelem(l,self.tabNSD) 
-            print("The logical consequence dependencies are : \n")
-            for m in l:
-                print(m)
+        if (arg_tab[0]==self.tabNSD[0]):
+            if(self.dejafaitNSD==1):
+                l=self.db_object.depTab
+                supelem(l,self.tabNSD) 
+                print("The logical consequence dependencies are : \n")
+                for m in l:
+                    print(m)
+            else:
+                print("You must do 'showNSD' before")
         else:
-            print("You must do 'showNSD' before")        
+            print("Please use the same table that you have used 'showNSD'")                
 
 
 

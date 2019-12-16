@@ -112,8 +112,9 @@ class Shell(cmd.Cmd):
             print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
-        for i in self.db_object.depTab:
-            self.db_object.removeDep(i)
+        else:
+            for i in self.db_object.depTab:
+                self.db_object.removeDep(i)
 
     def do_showDep(self, arg):
 

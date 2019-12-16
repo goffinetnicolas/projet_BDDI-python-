@@ -112,8 +112,9 @@ class Shell(cmd.Cmd):
             print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
-        for i in self.db_object.depTab:
-            self.db_object.removeDep(i)
+        else:
+            for i in self.db_object.depTab:
+                self.db_object.removeDep(i)
 
     def do_showDep(self, arg):
 
@@ -202,8 +203,9 @@ class Shell(cmd.Cmd):
             print("Please use the same table that you have used 'showNSD'")                
 
 
+    def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
-
+        """ Compute and show the closure of the attribute of the table indicated  """
 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 

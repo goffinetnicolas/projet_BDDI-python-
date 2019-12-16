@@ -198,8 +198,9 @@ class Shell(cmd.Cmd):
             print("Please use the same table that you have used 'showNSD'")                
 
 
+    def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
-
+        """ Compute and show the closure of the attribute of the table indicated  """
 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 

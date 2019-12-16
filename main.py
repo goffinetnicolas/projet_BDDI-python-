@@ -71,14 +71,19 @@ class Shell(cmd.Cmd):
             print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
+            return 0
+
         if (len(arg_tab) < 3):
             print("")  # space
             print("Error, you must type 3 arguments (table_name, lhs or {lhs1,lhs2,...}, rhs)")
             print("")  # space
-        if (not_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
-            print("")  # space
-            print("Error, you have types 2 identical attributes in lhs")
-            print("")  # space
+            return 0
+
+        if(isinstance(arg_tab[1], list)):
+            if(not_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
+                print("")  # space
+                print("Error, you have types 2 identical attributes in lhs")
+                print("")  # space
 
         else:
             new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])

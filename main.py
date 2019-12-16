@@ -62,6 +62,9 @@ class Shell(cmd.Cmd):
          It creates a new Dep object with the arguments indicated,
          the Dep object is added to the depTab list in the current DataBase object"""
 
+        if(arg==""):
+            print("Error, you must type 3 arguments (table_name, lhs or {lhs1,lhs2,...}, rhs)")
+            return 0
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
 
         if (self.db_object == None):

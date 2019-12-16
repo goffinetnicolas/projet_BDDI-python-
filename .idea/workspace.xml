@@ -4,8 +4,7 @@
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/putDataBaseHere/chinook" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/putDataBaseHere/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Bureau/test BDDI" />
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.main">
     <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="projet_BDDI-python-" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -98,8 +97,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.db" />
       </list>
     </recent_temporary>
@@ -176,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576359679240</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="upgrading and cleaning code">
+      <created>1576441410956</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1576441410957</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -187,17 +193,18 @@
     <MESSAGE value="Changing and adding new command lines (BCNF,3NF,Key,...)" />
     <MESSAGE value="adding multiple lhs attributes and trying to fix errors" />
     <MESSAGE value="fixing errors, upgrading command line messages and adding removeAllDep command" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing errors, upgrading command line messages and adding removeAllDep command" />
+    <MESSAGE value="upgrading and cleaning code" />
+    <option name="LAST_COMMIT_MESSAGE" value="upgrading and cleaning code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576324665305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576324665305" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576359678631">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576441410213">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576359678631" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576441410213" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -206,22 +213,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576438191958" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576439315298">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576447264365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576439315298" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576439315298">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576447264365" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576447264365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576439315298" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576439315298">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576447264365" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576447264365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576439315298" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576439315298">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576447264365" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576447264365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576439315298" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576447264365" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1576261247535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -242,14 +249,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="841" y="241" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576257337848" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576359692433">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576441417107">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576359692433" />
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576441371273">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576441417107" />
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576500833786">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576441371273" />
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576500833786" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576257310697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -239,6 +239,11 @@ class Shell(cmd.Cmd):
 
         """ Check if the data base file in in BCNF """
 
+        if(arg==""):
+            print("you have to enter a table")
+            return 0
+        self.db_object.checkBCNF(arg)
+
     def do_check3NF(self, arg):
 
         """ Check if the data base file in in 3NF """

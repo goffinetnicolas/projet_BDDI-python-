@@ -29,7 +29,7 @@ class Shell(cmd.Cmd):
 
     def do_connect(self, arg):
 
-        """ The user type 'connect [data base file]' to create a DataBase object connected with the file indicated """
+        """ The user type 'connect data_base.db' to create a DataBase object connected with the file indicated """
 
         if (arg == ""):
             print("")  # space
@@ -58,12 +58,14 @@ class Shell(cmd.Cmd):
 
     def do_addDep(self, arg):  # first argument is table name, second is lhs and third is rhs
 
-        """ The user type 'addDep [table_name] [lhs] [rhs]' to create a new functional dependency.
+        """ The user type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'
+         to create a new functional dependency.
          It creates a new Dep object with the arguments indicated,
          the Dep object is added to the depTab list in the current DataBase object"""
 
         if(arg==""):
-            print("Error, you must type 3 arguments (table_name, lhs or {lhs1,lhs2,...}, rhs)")
+            print("Error, you must type 'addDep table_name lhs rhs' "
+                  "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs' ")
             return 0
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
 
@@ -75,11 +77,11 @@ class Shell(cmd.Cmd):
 
         if (len(arg_tab) < 3):
             print("")  # space
-            print("Error, you must type 3 arguments (table_name, lhs or {lhs1,lhs2,...}, rhs)")
+            print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             print("")  # space
             return 0
 
-        if(isinstance(arg_tab[1], list)):
+        if(isinstance(arg_tab[1], list)): # doesn't work ?
             if(not_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
                 print("")  # space
                 print("Error, you have types 2 identical attributes in lhs")
@@ -91,7 +93,8 @@ class Shell(cmd.Cmd):
 
     def do_removeDep(self, arg):  # first argument is table name, second is lhs and third is rhs
 
-        """ The user type 'removeDep [table_name] [lhs] [rhs]' to remove the functional dependency indicated,
+        """ The user type 'removeDep table_name lhs rhs' or 'removeDep table_name {lhs1, lhs2, lhs3, ...} rhs'
+         to remove the functional dependency indicated,
          the Dep object is removed from the depTab list in the current DataBase object"""
 
         arg_tab=sep(arg)
@@ -101,7 +104,7 @@ class Shell(cmd.Cmd):
             print("")  # space
         if (len(arg_tab) < 3):
             print("")  # space
-            print("Error, you must type 3 arguments (table_name, lhs, rhs)")
+            print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             print("")  # space
         else:
             compare_dep = Dep(self.db_object, arg_tab[0], arg_tab[1], arg_tab[2])
@@ -127,7 +130,8 @@ class Shell(cmd.Cmd):
             l = self.db_object.depTab
             if (l == []):
                 print("There is no functional dependencies yet, "
-                      "you can add them with the command 'addDep [table_name] [lhs] [rhs]'")
+                      "you can add them with the command 'addDep table_name lhs rhs' "
+                      "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             for i in l:
                 print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
             print("")  # space
@@ -135,7 +139,7 @@ class Shell(cmd.Cmd):
     def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
 
         """ Compute and show the not satisfied functional dependencies
-        The user type 'showNSD [table_name]' """
+        The user type 'showNSD table_name' """
 
         #Ok ça detecte quand il n'y a pas de NSD, il faut juste tester si ça les détecte mtn 
 
@@ -187,7 +191,8 @@ class Shell(cmd.Cmd):
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
         """ Compute and show the functional dependencies that are a logical consequence 
-        The user type 'showLCD [table_name]'"""
+        The user type 'showLCD table_name' """
+
         #Il faut que showNSD ait ete effectue avant de faire ça 
         arg_tab=sep(arg) #c'est le nom de la table dans la base de données
         if (arg_tab[0]==self.tabNSD[0]):
@@ -206,7 +211,7 @@ class Shell(cmd.Cmd):
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
         """ Compute and show the closure of the attribute of the table indicated  
-        The user type 'showCOAS [table_name] [Attribute_name]'"""
+        The user type 'showCOAS table_name attribute_name' """
 
         #Precondition, il faut que les Df soit deja toutes correctes donc que les mauvaises Df pour la table aient ete supprime 
         lCSOA=[] #liste pour ajouter la fermeture 
@@ -237,7 +242,8 @@ class Shell(cmd.Cmd):
 
     def do_checkBCNF(self, arg):
 
-        """ Check if the data base file in in BCNF """
+        """ Check if the data base file in in BCNF,
+        user has to type the command 'checkBCNF table_name' """
 
         if(arg==""):
             print("you have to enter a table")

@@ -140,7 +140,6 @@ class DataBase:
                 print("")  # space
                 print("[" + table_name_arg + ": " + lhs_arg + " --> " + rhs_arg
                       + "] has been successfully removed from the functional dependencies")
-                print("")  # space
 
 
     def checkBCNF(self, table):

@@ -4,8 +4,6 @@
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/putDataBaseHere/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,10 +307,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576257310697" />
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576591929374">
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576612997545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576591929374" />
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576612997545" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576236039651">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

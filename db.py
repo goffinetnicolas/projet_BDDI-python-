@@ -144,40 +144,45 @@ class DataBase:
 
     def checkBCNF(self, table):
         l = self.depTab
-        table_dep_list = []  # list of functional dependencies linked to the table
+        table_dep_list = []  # = [dep1, dep2, dep3, dep4]
 
         for dep in l:  # extract the functional dependencies linked to the table
             if (dep.table_name == table):
                 table_dep_list.append(dep)
 
-        if (len(table_dep_list) == 0):
-            print("")  # space
-            print("There is not functional dependencies linked to the indicated table")
-            print("")  # space
-            return 0
+            if (len(table_dep_list) == 0):
+                print("")  # space
+                print("There is not functional dependencies linked to the indicated table")
+                print("")  # space
+                return 0
 
-        else:
-            for dep in table_dep_list:
+            att_list = self.find_table_attribute(table)  # = [
 
+            for dep1 in table_dep_list:
                 att_obtained = []  # attributes that we will obtain thanks to functional dependencies
-                att_list = self.find_table_attribute(table)  # the total attribute list of the table indicated
-                check = dep.rhs  # first check
+                att_obtained.append(dep1.rhs)
 
-                while (att_obtained.sort() != att_list.sort()):  # if we leave this loop, the current func dep is ok
-                    check_compare = check  # we save check
-                    att_obtained.append(check)  # adding the current rhs in the obtained list
-                    for dep2 in table_dep_list:  # we try to find if the current rhs in in the lhs
-                        if (detect(dep2.lhs, att_obtained)):
-                            check = dep2.rhs  # check become the next rhs
-                    if (check == check_compare):
-                        print("")  # space
-                        print(table+" is not in BCNF ")
-                        print("")  # space
-                        return False
+                if (isinstance(dep1.lhs, list)):
+                    for lhs in dep1.lhs:
+                        att_obtained.append(lhs)
+                else:
+                    att_obtained.append(dep1.lhs)
+
+                while (att_obtained.sort() != att_list.sort()):
+                    check_list = att_obtained
+                    for dep2 in table_dep_list:
+                        if (detect(dep2.lhs, att_obtained) and not dep2.__eq__(dep1)):
+                            att_obtained.append(dep2.rhs)
+                        if (check_list.sort() == att_obtained.sort()):
+                            print("")  # space
+                            print(table + " is not in BCNF :(")
+                            print("")  # space
+                            return False
 
             print("")  # space
-            print(table+" is in BCNF ")
+            print(table+" is in BCNF :)")
             print("")  # space
+
             return True
 
     def find_table_attribute(self, table):

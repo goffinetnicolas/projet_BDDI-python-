@@ -164,7 +164,7 @@ class DataBase:
                 att_list = self.find_table_attribute(table)  # the total attribute list of the table indicated
                 check = dep.rhs  # first check
 
-                while (att_obtained != att_list):  # if we leave this loop, the current func dep is ok
+                while (att_obtained.sort() != att_list.sort()):  # if we leave this loop, the current func dep is ok
                     check_compare = check  # we save check
                     att_obtained.append(check)  # adding the current rhs in the obtained list
                     for dep2 in table_dep_list:  # we try to find if the current rhs in in the lhs

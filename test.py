@@ -109,17 +109,11 @@ def detect(string_or_list_lhs, string_list):
         else:
             return False
 
-def detect2(a,b):
-    if(a in b):
-        return True
-    else:
-        return False
 
 a=["a", "b", "c", "d"]
-b=["a", "b", "c"]
+b=["a", "c", "b", "d"]
+print(a.sort()==b.sort())
 c="a"
 
-print(detect2(b,a)) # true
-print(detect2(a,b)) # false
-print(detect2(c,a)) # true
+
 

@@ -205,7 +205,29 @@ class Shell(cmd.Cmd):
 
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
-        """ Compute and show the closure of the attribute of the table indicated  """
+        """ Compute and show the closure of the attribute of the table indicated  
+        The user type 'showCOAS [table_name] [Attribute_name]'"""
+
+        #Precondition, il faut que les Df soit deja toutes correctes donc que les mauvaises Df pour la table aient ete supprime 
+        lCSOA=[] #liste pour ajouter la fermeture 
+        l=self.db_object.depTab
+        other=self.db_object.depTab #pour la transitivité 
+        nameT=str(arg[0]) #c'est le nom de la table dans la quelle on travaille 
+        nameAttribute=str(arg[1])
+        lCSOA.append(nameAttribute) #c'est toujours vrai ça 
+        for i in l:
+            if i.table_name==name and i.lhs==nameAttribute: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
+                lCSOA.append(str(i.rhs))
+                for j in other: #C'est pour traiter la transitivité 
+                    if j.table_name==name and i.rhs==j.lhs:
+                        lCSOA.append(str(j.rhs))  
+                        i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+        print("The closure of "+nameAttribute+" is : \n")                    
+        for nom in lCSOA:
+            print(nom)                
+
+
+
         
 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies

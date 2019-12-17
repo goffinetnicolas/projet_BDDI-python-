@@ -137,6 +137,8 @@ class Shell(cmd.Cmd):
         """ Compute and show the not satisfied functional dependencies
         The user type 'showNSD [table_name]' """
 
+        #Ok ça detecte quand il n'y a pas de NSD, il faut juste tester si ça les détecte mtn 
+
         l = self.db_object.depTab
         arg_tab=sep(arg)
         self.dejafaitNSD=1
@@ -164,12 +166,9 @@ class Shell(cmd.Cmd):
                     k=tabG[z]
                     if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
                         tabDf[k]=tabD[z]
-                        print("dedans")
                     if (k in tabDf and tabDf[k]!=tabD[z]): #pb on rentre pas dans cette boucle
                         self.tabNSD.append(i)
                         print("ok")
-                        print(tabDf[k])
-                        print(tabD[z])
                         z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
                     z=z+1
             r=r+1
@@ -179,8 +178,9 @@ class Shell(cmd.Cmd):
             #pas oublier de vider les tableaux et le dico
         if (len(self.tabNSD)>1):    
             print("It's the not satisfied functional dependencies")
-            for m in self.tabNSD:
-                print(m)
+            length=len(self.tabNSD)
+            for m in range(1,length):
+                print(self.tabNSD[m])
         else:
             print("There is no functional dependencies")        
     
@@ -206,6 +206,7 @@ class Shell(cmd.Cmd):
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
         """ Compute and show the closure of the attribute of the table indicated  """
+        
 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 

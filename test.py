@@ -95,9 +95,31 @@ def sep(arg): # "table {lhs1  ,lhs2, lhs3,lhs4, lhs5} rhs"
                 a = ""
     return res
 
-a="table_name  {lhs1}   rhs"
-b="table_name  {lhs1,   lhs2, lhs3  ,    lhs4}   rhs"
+def detect(string_or_list_lhs, string_list):
+    if(isinstance(string_or_list_lhs, list)):
+        lhs_list=string_or_list_lhs
+        for lhs in lhs_list:
+            if(lhs not in string_list):
+                return False
+        return True
+    else:
+        lhs_string=string_or_list_lhs
+        if(lhs_string in string_list):
+            return True
+        else:
+            return False
 
-print(sep(a), sep(b))
+def detect2(a,b):
+    if(a in b):
+        return True
+    else:
+        return False
 
+a=["a", "b", "c", "d"]
+b=["a", "b", "c"]
+c="a"
+
+print(detect2(b,a)) # true
+print(detect2(a,b)) # false
+print(detect2(c,a)) # true
 

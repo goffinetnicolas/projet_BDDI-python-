@@ -144,7 +144,7 @@ class DataBase:
 
 
     def checkBCNF(self, table):
-        l = self.db_object.depTab
+        l = self.depTab
         table_dep_list = []  # list of functional dependencies linked to the table
 
         for dep in l:  # extract the functional dependencies linked to the table
@@ -172,18 +172,18 @@ class DataBase:
                             check = dep2.rhs  # check become the next rhs
                     if (check == check_compare):
                         print("")  # space
-                        print("Table is not in BCNF ")
+                        print(table+" is not in BCNF ")
                         print("")  # space
                         return False
 
             print("")  # space
-            print("Table is in BCNF ")
+            print(table+" is in BCNF ")
             print("")  # space
             return True
 
     def find_table_attribute(self, table):
-        self.c.execute("""SELECT * from albums""")
-        att_list = [description[0] for description in c.description]
+        self.command.execute("""SELECT * from albums""")
+        att_list = [description[0] for description in self.command.description]
         return att_list
 
     def close(self):
@@ -210,4 +210,18 @@ def memberOf(depObject, depList): # not working correctly
         if(depObject.__eq__(i)):
             return True
     return False
+
+def detect(string_or_list_lhs, string_list):
+    if(isinstance(string_or_list_lhs, list)):
+        lhs_list=string_or_list_lhs
+        for lhs in lhs_list:
+            if(lhs not in string_list):
+                return False
+        return True
+    else:
+        lhs_string=string_or_list_lhs
+        if(lhs_string in string_list):
+            return True
+        else:
+            return False
 

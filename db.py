@@ -1,3 +1,4 @@
+import copy
 import sqlite3
 
 from dep import Dep
@@ -37,8 +38,8 @@ class DataBase:
         table_name_arg = dep_object.table_name
         lhs_arg = dep_object.lhs  # could be a string or a list
         rhs_arg = dep_object.rhs # always a string
-
         if(isinstance(lhs_arg, list)):
+            lhs_arg_tab=lhs_arg
             try:
                 for i in self.depTab:
                     if(dep_object.__eq__(i)):
@@ -47,11 +48,11 @@ class DataBase:
                         return 0 # we don't want to execute the rest of the function
 
 
-                for i in lhs_arg:
+                for i in lhs_arg_tab:
                     self.command.execute("SELECT "+i+", "+rhs_arg+" FROM "+table_name_arg)
                     # make an error if the attributes or the table is not in the data base
 
-                lhs_string = extract(lhs_arg)
+                lhs_string = extract(lhs_arg_tab)
 
                 self.command.execute("INSERT INTO FuncDep VALUES (:table_name, :lhs, :rhs)",
                                     (table_name_arg, lhs_string, rhs_arg))
@@ -60,8 +61,7 @@ class DataBase:
                 print("New functional dependency added:")
                 dep_object.__str__()
 
-            except Exception as e:
-                print(e)
+            except:
                 print("Error, the attribute(s) or the table indicated do not exist")
                 print("")  # space
 
@@ -142,7 +142,7 @@ class DataBase:
 
     def checkBCNF(self, table):
         l = self.depTab
-        table_dep_list = []  # = [dep1, dep2, dep3, dep4]
+        table_dep_list = []  # = [dep1, dep2, dep3]
 
         for dep in l:  # extract the functional dependencies linked to the table
             if (dep.table_name == table):
@@ -155,7 +155,7 @@ class DataBase:
             return 0
 
         att_list = self.find_table_attribute(table)  # total attribute list of the table
-
+        # att_list = title, artistid, albumid
         if(len(table_dep_list) == 1):
 
             att_obtained = []  # attributes that we will obtain thanks to functional dependencies
@@ -182,6 +182,7 @@ class DataBase:
         else:
             for dep1 in table_dep_list:
                 att_obtained = []  # attributes that we will obtain thanks to functional dependencies
+                # att_obtained = title,artistid,albumid
                 att_obtained.append(dep1.rhs)
 
                 if (isinstance(dep1.lhs, list)):
@@ -191,15 +192,20 @@ class DataBase:
                     att_obtained.append(dep1.lhs)
 
                 while (not compareList(att_list,att_obtained)):
-                    check_list = att_obtained
+                    print("beginning of the loop with att_list=",att_list," and att_obtained=",att_obtained)
+                    check_list = copy.deepcopy(att_obtained) # title,artistid
+                    print("check_list=",check_list)
                     for dep2 in table_dep_list:
-                        if (detect(dep2.lhs, att_obtained) and not dep2.__eq__(dep1)):
+                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):
                             att_obtained.append(dep2.rhs)
-                        if (check_list.sort() == att_obtained.sort()):
-                            print("")  # space
-                            print(table + " is not in BCNF :(")
-                            print("")  # space
-                            return False
+                            print(dep2.rhs+" has been added to att_obtained")
+                    print("att_obtained is now =",att_obtained)
+                    print("check_list is now =",check_list)
+                    if (compareList(check_list, att_obtained)):
+                        print("")  # space
+                        print(table + " is not in BCNF :(")
+                        print("")  # space
+                        return False
 
             print("")  # space
             print(table+" is in BCNF :)")
@@ -251,11 +257,17 @@ def detect(string_or_list_lhs, string_list):
             return False
 
 def compareList(list1, list2):
+    a=[]
+    b=[]
     for i in list1:
-        if(i not in list2):
-            return False
+        a.append(i.lower())
     for i in list2:
-        if(i not in list1):
+        b.append(i.lower())
+    for i in a:
+        if(i not in b):
+            return False
+    for i in b:
+        if(i not in a):
             return False
     return True
 

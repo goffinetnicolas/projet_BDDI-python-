@@ -82,16 +82,15 @@ class Shell(cmd.Cmd):
             print("")  # space
             return 0
 
-        if(isinstance(arg_tab[1], list)): # doesn't work ?
-            if(verify_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
+        if(isinstance(arg_tab[1], list)):
+            if(verify_recurrent_lhs(arg_tab[1])):
                 print("")  # space
                 print("Error, you have types 2 identical attributes in lhs")
                 print("")  # space
                 return 0
 
-        else:
-            new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
-            self.db_object.addDep(new_dep_object)
+        new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
+        self.db_object.addDep(new_dep_object)
 
     def do_removeDep(self, arg):  # first argument is table name, second is lhs and third is rhs
 
@@ -216,19 +215,20 @@ class Shell(cmd.Cmd):
         lLCD=[]
         lDF=[]
         for i in l:
-        	lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons 
-        	for j in other:
-        		if i.table_name==nameT and j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
-        			lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
-        			#i.rhs=j.rhs
+            lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons
+            for j in other:
+                if i.table_name==nameT and j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
+                    lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
+
+                    #i.rhs=j.rhs
                     if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
                             i.rhs=j.rhs
                             # si on inerse pas et qu'on recoit 1->2 2->3
         noDoublons(lLCD,lDF) #permet de supprimer les doublons 
         print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
         for x in lLCD:
-        	print(x)
-        			               
+            print(x)
+
 
 
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
@@ -399,10 +399,10 @@ def supelem(lp,eli):
 #pour supprimer les elements de eli dans lp    
 
 def noDoublons(a,b):
-	for x in a:
-		if x in b:
-			a.remove(x)
-	return a		        
+    for x in a:
+        if x in b:
+            a.remove(x)
+    return a
 
 
 if __name__ == '__main__':

@@ -261,6 +261,20 @@ class Shell(cmd.Cmd):
 
         """ Compute and show functional dependencies that are unnecessary or inconsistent,
         the user can delete them if he wishes """
+        l=self.db_object.depTab
+        other=self.db_object.depTab
+        arg_tab=sep(arg)
+        nameT=str(arg_tab[0])
+        lUID=[]
+        for i in l:  
+                for j in other: #C'est pour traiter la transitivité 
+                    if j.table_name==nameT and i.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
+                        x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                        if x in l:
+                            lUID.append(x)
+                        i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+        for z in lUID:
+            print (z)   
 
     def do_checkBCNF(self, arg):
 

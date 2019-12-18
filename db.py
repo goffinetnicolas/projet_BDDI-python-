@@ -150,35 +150,38 @@ class DataBase:
             if (dep.table_name == table):
                 table_dep_list.append(dep)
 
-            if (len(table_dep_list) == 0):
+        if (len(table_dep_list) == 0):
+            print("")  # space
+            print("There is not functional dependencies linked to the indicated table")
+            print("")  # space
+            return 0
+
+        att_list = self.find_table_attribute(table)  # total attribute list of the table
+
+        if(len(table_dep_list) == 1):
+
+            att_obtained = []  # attributes that we will obtain thanks to functional dependencies
+            lhs = table_dep_list[0].lhs
+            rhs = table_dep_list[0].rhs
+
+            if (isinstance(lhs, list)):
+                for lhs_string in lhs:
+                    att_obtained.append(lhs_string)
+            else:
+                att_obtained.append(lhs)
+
+            att_obtained.append(rhs)
+
+            if(not compareList(att_list,att_obtained)):
                 print("")  # space
-                print("There is not functional dependencies linked to the indicated table")
+                print(table + " is not in BCNF :(")
                 print("")  # space
-                return 0
-
-            att_list = self.find_table_attribute(table)  # = [
-
-            if(len(table_dep_list) == 1):
-                att_obtained = []  # attributes that we will obtain thanks to functional dependencies
-                lhs=table_dep_list[0].lhs
-                rhs=table_dep_list[0].rhs
-                if (isinstance(lhs, list)):
-                    for lhs_string in lhs:
-                        att_obtained.append(lhs_string)
-                else:
-                    att_obtained.append(lhs)
-
-                att_obtained.append(rhs)
-
-                if(att_obtained.sort() != att_list.sort()):
-                    print("")  # space
-                    print(table + " is not in BCNF :(")
-                    print("")  # space
-                    return False
-                print("")  # space
-                print(table + " is in BCNF :)")
-                print("")  # space
-
+                return False
+            print("")  # space
+            print(table + " is in BCNF :)")
+            print("")  # space
+            return True
+        else:
             for dep1 in table_dep_list:
                 att_obtained = []  # attributes that we will obtain thanks to functional dependencies
                 att_obtained.append(dep1.rhs)
@@ -189,7 +192,7 @@ class DataBase:
                 else:
                     att_obtained.append(dep1.lhs)
 
-                while (att_obtained.sort() != att_list.sort()):
+                while (not compareList(att_list,att_obtained)):
                     check_list = att_obtained
                     for dep2 in table_dep_list:
                         if (detect(dep2.lhs, att_obtained) and not dep2.__eq__(dep1)):
@@ -203,11 +206,10 @@ class DataBase:
             print("")  # space
             print(table+" is in BCNF :)")
             print("")  # space
-
             return True
 
     def find_table_attribute(self, table):
-        self.command.execute("""SELECT * from albums""")
+        self.command.execute("""SELECT * from """+table)
         att_list = [description[0] for description in self.command.description]
         return att_list
 
@@ -249,4 +251,13 @@ def detect(string_or_list_lhs, string_list):
             return True
         else:
             return False
+
+def compareList(list1, list2):
+    for i in list1:
+        if(i not in list2):
+            return False
+    for i in list2:
+        if(i not in list1):
+            return False
+    return True
 

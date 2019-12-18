@@ -218,9 +218,12 @@ class Shell(cmd.Cmd):
         for i in l:
         	lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons 
         	for j in other:
-        		if i.table_name==nameT and j.table_name==nameT and i.rhs==j.lhs:
+        		if i.table_name==nameT and j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
         			lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
-        			i.rhs=j.rhs
+        			#i.rhs=j.rhs
+                    if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
+                            i.rhs=j.rhs
+                            # si on inerse pas et qu'on recoit 1->2 2->3
         noDoublons(lLCD,lDF) #permet de supprimer les doublons 
         print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
         for x in lLCD:
@@ -246,9 +249,16 @@ class Shell(cmd.Cmd):
             if i.table_name==nameT and i.lhs==nameAttribute: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
                 lCSOA.append(str(i.rhs))
                 for j in other: #C'est pour traiter la transitivité 
-                    if j.table_name==nameT and i.rhs==j.lhs:
+                    if j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
                         lCSOA.append(str(j.rhs))  
-                        i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+                       # i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+                        if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
+                            i.rhs=j.rhs
+                            # si on inerse pas et qu'on recoit 1->2 2->3
+                        
+                               
+
+
         print("The closure of "+nameAttribute+" is : \n")                    
         for nom in lCSOA:
             print(nom)                
@@ -272,7 +282,10 @@ class Shell(cmd.Cmd):
                         x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
                         if x in l:
                             lUID.append(x)
-                        i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+                        #i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
+                        if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
+                            i.rhs=j.rhs
+                            # si on inerse pas et qu'on recoit 1->2 2->3
         for z in lUID:
             print (z)   
 

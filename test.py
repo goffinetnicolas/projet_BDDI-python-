@@ -1,6 +1,11 @@
 import sqlite3
+from dep import Dep
 
-con = sqlite3.connect('putDataBaseHere/test.db')
+
+x=Dep("DB","Table","un","deux")
+y=input("Chiffre")
+print(str(x)[32:len(str(x))])
+'''con = sqlite3.connect('putDataBaseHere/test.db')
 
 c = con.cursor()
 
@@ -31,14 +36,14 @@ def remplire(d,t,v):
 
 t2=["un","deux","trois"]
 t1=["deux","trois"]
-'''d={}
+d={}
 remplire(d,t1,t2)
 print(t1)
 t1=[]
 print(t1) 
 print(d)
 d={}
-print(len(t1)==0)  ''' 
+print(len(t1)==0)  
 def findIndice(lp,eli):
     i=0
     while(i<len(lp)):
@@ -128,7 +133,7 @@ def extract(s):
     return res[:l]
 
 a=["lhs", "lhs", "lhs"]
-print(extract(a))
+print(extract(a))'''
 
 
 

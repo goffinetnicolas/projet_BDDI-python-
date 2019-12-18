@@ -187,7 +187,8 @@ class Shell(cmd.Cmd):
                 print(self.tabNSD[m])
         else:
             print("There is no functional dependencies")        
-    
+
+    #recopier le code de mon gsm pour LCD 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
         """ Compute and show the functional dependencies that are a logical consequence 

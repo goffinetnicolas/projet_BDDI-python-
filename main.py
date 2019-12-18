@@ -195,7 +195,7 @@ class Shell(cmd.Cmd):
         The user type 'showLCD table_name' """
 
         #Il faut que showNSD ait ete effectue avant de faire ça 
-        arg_tab=sep(arg) #c'est le nom de la table dans la base de données
+       ''' arg_tab=sep(arg) #c'est le nom de la table dans la base de données
         if (arg_tab[0]==self.tabNSD[0]):
             if(self.dejafaitNSD==1):
                 l=self.db_object.depTab
@@ -206,7 +206,23 @@ class Shell(cmd.Cmd):
             else:
                 print("You must do 'showNSD' before")
         else:
-            print("Please use the same table that you have used 'showNSD'")                
+            print("Please use the same table that you have used 'showNSD'")     '''
+        l=self.db_object.depTab
+        other=self.db_object.depTab
+        nameT=str(arg[0])
+        lLCD=[]
+        lDF=[]
+        for i in l:
+        	lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons 
+        	for j in other:
+        		if i.table_name==nameT and j.table_name==nameT and i.rhs==j.lhs:
+        			lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
+        			i.rhs=j.rhs
+        noDoublons(lLCD,lDF) #permet de supprimer les doublons 
+        print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
+        for x in lLCD:
+        	print(x)
+        			               
 
 
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
@@ -340,7 +356,13 @@ def supelem(lp,eli):
             i=i-1
         i=i+1
     return lp
-#pour supprimer les elements de eli dans lp            
+#pour supprimer les elements de eli dans lp    
+
+def noDoublons(a,b):
+	for x in a:
+		if x in b:
+			a.remove(x)
+	return a		        
 
 
 if __name__ == '__main__':

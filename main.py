@@ -209,7 +209,8 @@ class Shell(cmd.Cmd):
              print("Please use the same table that you have used 'showNSD'")     '''
         l=self.db_object.depTab
         other=self.db_object.depTab
-        nameT=str(arg[0])
+        arg_tab=sep(arg)
+        nameT=str(arg_tab[0])
         lLCD=[]
         lDF=[]
         for i in l:
@@ -234,14 +235,16 @@ class Shell(cmd.Cmd):
         lCSOA=[] #liste pour ajouter la fermeture 
         l=self.db_object.depTab
         other=self.db_object.depTab #pour la transitivité 
-        nameT=str(arg[0]) #c'est le nom de la table dans la quelle on travaille 
-        nameAttribute=str(arg[1])
+        arg_tab=sep(arg)
+        nameT=str(arg_tab[0]) #c'est le nom de la table dans la quelle on travaille 
+        nameAttribute=str(arg_tab[1])
+        print(nameAttribute)
         lCSOA.append(nameAttribute) #c'est toujours vrai ça 
         for i in l:
-            if i.table_name==name and i.lhs==nameAttribute: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
+            if i.table_name==nameT and i.lhs==nameAttribute: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
                 lCSOA.append(str(i.rhs))
                 for j in other: #C'est pour traiter la transitivité 
-                    if j.table_name==name and i.rhs==j.lhs:
+                    if j.table_name==nameT and i.rhs==j.lhs:
                         lCSOA.append(str(j.rhs))  
                         i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
         print("The closure of "+nameAttribute+" is : \n")                    

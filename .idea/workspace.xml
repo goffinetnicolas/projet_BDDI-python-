@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="" />
+    <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576605999116</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fixing indent error">
+      <created>1576678108919</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1576678108919</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -238,16 +248,18 @@
     <MESSAGE value="fixing removeAllDep command" />
     <MESSAGE value="adding BCNF command, not tested yet" />
     <MESSAGE value="testing and fixing BCNF" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing and fixing BCNF" />
+    <MESSAGE value="fixing indent error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing indent error" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576324665305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576324665305" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576605998534">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="461" y="99" key="CommitChangelistDialog2" timestamp="1576678108539">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="461" y="99" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1576678108539" />
     <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576605998534" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -301,9 +313,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576677923441" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576606005410">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="414" y="218" key="Vcs.Push.Dialog.v2" timestamp="1576678122118">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="414" y="218" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1576678122118" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576606005410" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576603949453">
       <screen x="0" y="0" width="1920" height="1040" />

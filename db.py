@@ -158,6 +158,27 @@ class DataBase:
 
             att_list = self.find_table_attribute(table)  # = [
 
+            if(len(table_dep_list) == 1):
+                att_obtained = []  # attributes that we will obtain thanks to functional dependencies
+                lhs=table_dep_list[0].lhs
+                rhs=table_dep_list[0].rhs
+                if (isinstance(lhs, list)):
+                    for lhs_string in lhs:
+                        att_obtained.append(lhs_string)
+                else:
+                    att_obtained.append(lhs)
+
+                att_obtained.append(rhs)
+
+                if(att_obtained.sort() != att_list.sort()):
+                    print("")  # space
+                    print(table + " is not in BCNF :(")
+                    print("")  # space
+                    return False
+                print("")  # space
+                print(table + " is in BCNF :)")
+                print("")  # space
+
             for dep1 in table_dep_list:
                 att_obtained = []  # attributes that we will obtain thanks to functional dependencies
                 att_obtained.append(dep1.rhs)

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-    </list>
+    <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +25,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Bureau/test BDDI" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -259,21 +257,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576438191958" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576607227558">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1576678072542">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576678072542" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576607227558" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576607227558">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1576678072539">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576678072539" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576607227558" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576607227558">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1576678072537">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576678072537" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576607227558" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576607227558">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1576678072540">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576678072540" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576607227558" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1576261247535">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -295,6 +297,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="841" y="241" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576257337848" />
+    <state x="229" y="89" key="SettingsEditor" timestamp="1576677923441">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576677923441" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576606005410">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

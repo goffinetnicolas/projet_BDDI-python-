@@ -191,22 +191,22 @@ class Shell(cmd.Cmd):
     #recopier le code de mon gsm pour LCD 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
-        """ Compute and show the functional dependencies that are a logical consequence 
+        """ Compute and show the functional dependencies that are a logical consequence
         The user type 'showLCD table_name' """
 
         #Il faut que showNSD ait ete effectue avant de faire ça 
-       ''' arg_tab=sep(arg) #c'est le nom de la table dans la base de données
+        ''' arg_tab=sep(arg) #c'est le nom de la table dans la base de données
         if (arg_tab[0]==self.tabNSD[0]):
-            if(self.dejafaitNSD==1):
-                l=self.db_object.depTab
-                supelem(l,self.tabNSD) 
-                print("The logical consequence dependencies are : \n")
-                for m in l:
-                    print(m)
+        if(self.dejafaitNSD==1):
+            l=self.db_object.depTab
+            supelem(l,self.tabNSD) 
+            print("The logical consequence dependencies are : \n")
+            for m in l:
+                print(m)
             else:
                 print("You must do 'showNSD' before")
         else:
-            print("Please use the same table that you have used 'showNSD'")     '''
+             print("Please use the same table that you have used 'showNSD'")     '''
         l=self.db_object.depTab
         other=self.db_object.depTab
         nameT=str(arg[0])

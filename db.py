@@ -50,8 +50,6 @@ class DataBase:
                 for i in lhs_arg:
                     self.command.execute("SELECT "+i+", "+rhs_arg+" FROM "+table_name_arg)
                     # make an error if the attributes or the table is not in the data base
-                    # N.B : I have tried to do this with dictionary
-                    # and variables filling during 2 hours but it didn't work
 
                 lhs_string = extract(lhs_arg)
 
@@ -112,7 +110,7 @@ class DataBase:
                 print("")  # space
             else:
                 for i in current_dep_tab:
-                    if (i.__eq__(dep_object)): # not working correctly
+                    if (i.__eq__(dep_object)):
                         self.depTab.remove(i)
 
                 self.command.execute("DELETE FROM FuncDep WHERE table_name = :table_name AND lhs = :lhs AND rhs = :rhs",
@@ -125,7 +123,7 @@ class DataBase:
                 print("")  # space
         else:
             current_dep_tab = self.depTab
-            if (dep_object not in current_dep_tab):
+            if (not memberOf(dep_object, current_dep_tab)):
                 print("")  # space
                 print("Error, The arguments indicated are not in the functional dependencies")
                 print("")  # space

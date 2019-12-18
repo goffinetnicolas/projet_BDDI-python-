@@ -256,9 +256,6 @@ class Shell(cmd.Cmd):
                             i.rhs=j.rhs
                             # si on inerse pas et qu'on recoit 1->2 2->3
                         
-                               
-
-
         print("The closure of "+nameAttribute+" is : \n")                    
         for nom in lCSOA:
             print(nom)                
@@ -288,6 +285,8 @@ class Shell(cmd.Cmd):
                             # si on inerse pas et qu'on recoit 1->2 2->3
         for z in lUID:
             print (z)   
+
+        # Demander si on veut supprimer et utiliser noDoublons pour le faire     
 
     def do_checkBCNF(self, arg):
 

@@ -40,12 +40,12 @@ class Dep:
 def compare_list(a,b):
     c1=[]
     c2=[]
-    a.sort()
-    b.sort()
     for i in a:
         c1.append(i.lower())
     for e in b:
         c2.append(e.lower())
+    c1.sort()
+    c2.sort()
     return c1 == c2
 
 def rep(lhs):

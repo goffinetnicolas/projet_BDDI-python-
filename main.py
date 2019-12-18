@@ -68,6 +68,7 @@ class Shell(cmd.Cmd):
                   "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs' ")
             return 0
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
+        print(arg_tab)
 
         if (self.db_object == None):
             print("")  # space
@@ -82,10 +83,11 @@ class Shell(cmd.Cmd):
             return 0
 
         if(isinstance(arg_tab[1], list)): # doesn't work ?
-            if(not_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
+            if(verify_recurrent_lhs(arg_tab[1])):  # verify if there are identical lhs
                 print("")  # space
                 print("Error, you have types 2 identical attributes in lhs")
                 print("")  # space
+                return 0
 
         else:
             new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
@@ -325,16 +327,16 @@ def sep(arg):
 
     return res
 
-def not_recurrent_lhs(tab):
-    c=0
-    for i in tab:
-        for e in tab:
-            if i == e:
-                c=c+1
-        if(c>1):
-            return False
-        c=0
-    return True
+def verify_recurrent_lhs(tab):
+    # return True if something in the list is recurrent
+    comp = [tab[0]]
+    a=1
+    while(a != len(tab)):
+        if(tab[a] in comp):
+            return True
+        comp.append(tab[a])
+        a=a+1
+    return False
 
 def argAttribute(a):
         e=a.split()

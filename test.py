@@ -109,11 +109,31 @@ def detect(string_or_list_lhs, string_list):
         else:
             return False
 
+def verify_recurrent_lhs(tab):
+    # return True if something in the list is recurrent
+    comp = [tab[0]]
+    a=1
+    while(a != len(tab)):
+        if(tab[a] in comp):
+            return True
+        comp.append(tab[a])
+        a=a+1
+    return False
 
-a=["a", "b", "c", "d"]
-b=["a", "c", "b", "d"]
-print(a.sort()==b.sort())
-c="a"
+def compare_list(a,b):
+    c1=[]
+    c2=[]
+    for i in a:
+        c1.append(i.lower())
+    for e in b:
+        c2.append(e.lower())
+    c1.sort()
+    c2.sort()
+    return c1 == c2
+
+a="table lhs rhs"
+b="table {lhs} rhs"
+print(sep(a),sep(b))
 
 
 

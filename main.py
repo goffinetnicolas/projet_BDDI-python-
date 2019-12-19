@@ -268,8 +268,8 @@ class Shell(cmd.Cmd):
                             lCSOA.append(str(j.rhs))
                             lCSOA.append(str(i.rhs))
                             #i.rhs=j.rhs 
-                        print(i.lhs+"-->"+i.rhs)
-                        print(j.lhs+"-->"+j.rhs)   
+                        #print(i.lhs+"-->"+i.rhs)
+                        #print(j.lhs+"-->"+j.rhs)   
                         if i.lhs==j.rhs and j.lhs not in lCSOA:
                             lCSOA.append(str(j.lhs))  
                             #print("i.rhs :"+i.rhs)
@@ -302,15 +302,21 @@ class Shell(cmd.Cmd):
         lNameDep=[] #pour avoir juste le nom des dep 
         for h in l:
             lNameDep.append(str(h)[32:len(str(h))])  
-        for i in l:    
+        for i in l:  
+            a_irhs=i.rhs  
             for j in other: #C'est pour traiter la transitivité 
                 if j.table_name==nameT and i.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
-                    x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                    if (i.rhs==j.lhs):
+                        x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                        i.rhs=j.rhs
+                    if (i.lhs==j.rhs):
+                        x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                        i.rhs=a_irhs
+                    if(i.lhs==i.rhs):
+                        x=str(i.lhs)+" --> "+str(i.rhs)   
                     if x in lNameDep:
                         lUID.append(x)
                     #i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
-                    if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
-                        i.rhs=j.rhs
                         # si on inerse pas et qu'on recoit 1->2 2->3
         for z in lUID:
             print (z) 

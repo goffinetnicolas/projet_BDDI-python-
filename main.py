@@ -147,22 +147,18 @@ class Shell(cmd.Cmd):
             if i.table_name==arg_tab[0]:
                 attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche
                 attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche
-                print(attribute1)
-                print(attribute2)
                 self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
                 tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux
                 self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
                 tabG=self.db_object.command.fetchall()
                 # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte
                 z=0
-                print(len(tabD[z]))
                 while (z<len(tabG)):
                     k=tabG[z]
                     if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
                         tabDf[k]=tabD[z]
                     if (k in tabDf and tabDf[k]!=tabD[z]): #pb on rentre pas dans cette boucle
                         self.tabNSD.append(i)
-                        print("ok")
                         z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
                     z=z+1
             r=r+1
@@ -174,7 +170,8 @@ class Shell(cmd.Cmd):
             print("It's the not satisfied functional dependencies")
             length=len(self.tabNSD)
             for m in range(1,length):
-                m.__str__()
+                self.tabNSD[m].__str__()
+                #print(self.tabNSD[m])
         else:
             print("There is no functional dependencies")
 

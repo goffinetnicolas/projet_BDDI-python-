@@ -145,8 +145,10 @@ class Shell(cmd.Cmd):
         r=0 #pour ne toucher que les df qui concerne la table
         for i in l:
             if i.table_name==arg_tab[0]:
+                #print(self.db_object.depTab[r].lhs)
                 attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche
                 attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche
+                #print(attribute1)
                 self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
                 tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux
                 self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
@@ -399,12 +401,11 @@ def verify_recurrent_lhs(tab):
     return False
 
 def argAttribute(a):
-        e=a.split()
-        x=len(e)
-        res=""+str(e[0])
+        x=len(a)
+        res=""+str(a[0])
         if(x>1):
             for i in range(1,x):
-                res=res+', '+str(e[i])
+                res=res+', '+str(a[i])
         return res       
 
 '''def remplire(d,t,v) # le t c'est les clef et v les valeurs 

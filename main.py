@@ -244,22 +244,41 @@ class Shell(cmd.Cmd):
         arg_tab=sep(arg)
         nameT=str(arg_tab[0]) #c'est le nom de la table dans la quelle on travaille 
         nameAttribute=str(arg_tab[1])
-        print(nameAttribute)
         lCSOA.append(nameAttribute) #c'est toujours vrai ça 
         for i in l:
-            if i.table_name==nameT and i.lhs==nameAttribute: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
-                lCSOA.append(str(i.rhs))
-                for j in other: #C'est pour traiter la transitivité 
+            if i.lhs==nameAttribute:
+                lCSOA.append(str(i.rhs))  
+            #print(i.table_name==nameT)
+            #print(i.lhs==nameAttribute )
+            #print(i.rhs not in lCSOA)
+            if i.table_name==nameT : #and i.rhs not in lCSOA:#and i.lhs==nameAttribute and i.rhs not in lCSOA: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
+                #lCSOA.append(str(i.rhs))
+                #print(i)
+                for j in other[1:]: #C'est pour traiter la transitivité
+                    #print("j.rhs :"+j.rhs) 
+                    #print("i.lhs :"+i.lhs)
+                    #print(j)
                     if j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
-                        lCSOA.append(str(j.rhs))  
+                        if i.rhs==j.lhs and j.rhs not in lCSOA:
+                            lCSOA.append(str(j.rhs))
+                            lCSOA.append(str(i.rhs))
+                            #i.rhs=j.rhs 
+                        print(i.lhs+"-->"+i.rhs)
+                        print(j.lhs+"-->"+j.rhs)   
+                        if i.lhs==j.rhs and j.lhs not in lCSOA:
+                            lCSOA.append(str(j.lhs))  
+                            #print("i.rhs :"+i.rhs)
+                        '''if i.lhs==j.rhs:
+                            lCSOA.append(str(i.rhs))'''    
                        # i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
-                        if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
-                            i.rhs=j.rhs
+                        '''if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
+                            i.rhs=j.rhs'''
                             # si on inerse pas et qu'on recoit 1->2 2->3
                         
         print("The closure of "+nameAttribute+" is : \n")                    
         for nom in lCSOA:
             print(nom)                
+        lCSOA=[]
 
 
 

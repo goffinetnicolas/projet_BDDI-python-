@@ -217,18 +217,25 @@ class Shell(cmd.Cmd):
         lDF=[]
         for i in l:
             lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons
+            a_irhs=i.rhs #pour sauvegarder la prmiere valeur 
             for j in other:
-                if i.table_name==nameT and j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
+                if i.lhs==j.rhs and i.table_name==nameT and j.table_name==nameT:
+                    i.rhs=a_irhs
+                    lLCD.append(str(j.lhs)+" --> "+str(i.rhs))
+                if i.table_name==nameT and j.table_name==nameT and i.rhs==j.lhs:
                     lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
-
+                    i.rhs=j.rhs
+                    #voir cas sur papier avec des chiffres 
                     #i.rhs=j.rhs
-                    if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
-                            i.rhs=j.rhs
                             # si on inerse pas et qu'on recoit 1->2 2->3
         noDoublons(lLCD,lDF) #permet de supprimer les doublons 
         print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
-        for x in lLCD:
+        for x in set(lLCD):
             print(x)
+        lLCD=[]
+        lDF=[]   
+        print(lLCD)
+        print(lDF) 
 
 
 

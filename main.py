@@ -171,7 +171,7 @@ class Shell(cmd.Cmd):
             print("It's the not satisfied functional dependencies")
             length=len(tabNSD)
             for m in range(1,length):
-                tabNSD[m].__str__()
+                print(tabNSD[m])
                 #print(self.tabNSD[m])
         else:
             print("There is no functional dependencies")

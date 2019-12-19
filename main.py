@@ -303,27 +303,28 @@ class Shell(cmd.Cmd):
         for h in l:
             lNameDep.append(str(h)[32:len(str(h))])  
         for i in l:  
-            a_irhs=i.rhs  
+            a_irhs=i.rhs  #Il faut etre le deplacer dans la premiere boucle if 
             for j in other: #C'est pour traiter la transitivité 
                 if j.table_name==nameT and i.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
+                    lUID.append(str(i.lhs)+" --> "+str(i.rhs))
                     if (i.rhs==j.lhs):
                         x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
                         i.rhs=j.rhs
                     if (i.lhs==j.rhs):
                         x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
                         i.rhs=a_irhs
-                    if(i.lhs==i.rhs):
-                        x=str(i.lhs)+" --> "+str(i.rhs)   
-                    if x in lNameDep:
+                    '''if(i.lhs==i.rhs):
+                        x=str(i.lhs)+" --> "+str(i.rhs)  ''' 
+                    if x not in lUID: #Je ne comprends pas cette boucle 
                         lUID.append(x)
                     #i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
-                        # si on inerse pas et qu'on recoit 1->2 2->3
+                        # si on inerse pas et qu'on recoit 1->2 2->3               
         for z in lUID:
-            print (z) 
+            print(z) 
         print("If you want to delete them, please press 1 but if you don't want press 2")
         y=input()
         if y==1:
-            noDoublons(lNameDep,lUID)
+            noDoublons(lNameDep,lUID) #CA ne supprime pas 
             for m in lNameDep:
                 print(m)      
 

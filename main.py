@@ -274,9 +274,10 @@ class Shell(cmd.Cmd):
                         '''if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
                             i.rhs=j.rhs'''
                             # si on inerse pas et qu'on recoit 1->2 2->3
-                        
+        
+                   
         print("The closure of "+nameAttribute+" is : \n")                    
-        for nom in lCSOA:
+        for nom in set(lCSOA):
             print(nom)                
         lCSOA=[]
 

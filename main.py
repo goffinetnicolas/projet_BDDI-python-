@@ -301,7 +301,22 @@ class Shell(cmd.Cmd):
         lUID=[] #pour avoir ceux qui ne sont pas correcte 
         lNameDep=[] #pour avoir juste le nom des dep 
         for h in l:
-            lNameDep.append(str(h)[32:len(str(h))])  
+            lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
+            print(type(h.lhs))
+            if (isinstance(h.lhs,list)):
+                #h.lhs=", ".join(h.lhs)
+                for r in str(h):
+                    lennn=lenn+int(len(r))
+                lenn=int(len(str(h)))-lennn+6
+                print(lenn)    
+            #print(lenn)    
+            #lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
+            print(str(h)[lenn:])
+            #print(len(", ".join(l[7].lhs)))
+            #print(len(h.lhs))
+            lNameDep.append(str(h)[lenn])  
+            #print(str(h)[lenn:])
+            #print(str(h)[36:len(str(h))])
         for i in l:  
             a_irhs=i.rhs  #Il faut etre le deplacer dans la premiere boucle if 
             for j in other: #C'est pour traiter la transitivité 
@@ -321,7 +336,7 @@ class Shell(cmd.Cmd):
                         # si on inerse pas et qu'on recoit 1->2 2->3               
         for z in lUID:
             print(z) 
-        print(l)    
+        #print(l[32:len(str(l))])    
         print("If you want to delete them, please press 1 but if you don't want press 2")
         y=input()
         if y=="1":
@@ -329,9 +344,11 @@ class Shell(cmd.Cmd):
             for m in lNameDep:
                 print(m)      '''
             for v in self.db_object.depTab:
-                print(v.table_name==nameT)
-                print(v in lUID)
-                if v.table_name==nameT and v in lUID:
+                #print(v.table_name==nameT)
+                #print(v in lUID)
+                #print(str(v)[32:len(str(h))])
+                lenn1=len(str(v))-(len(v.rhs)+len(v.lhs)+5)
+                if v.table_name==nameT and str(v)[lenn1] in lUID:
                     remove(v)
                     print(v)
 

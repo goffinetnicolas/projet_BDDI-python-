@@ -10,8 +10,8 @@ class Shell(cmd.Cmd):
     intro = 'Welcome to the functional dependencies shell.   Type help or ? to list commands.\n'
     prompt = 'Type a command >>> '
     db_object = None
-    tabNSD=[] #table ou il y a les df qui ne sont pas satisafite 
-    dejafaitNSD=0 #pour savoir si on a déja fait une methode 
+    #tabNSD=[] #table ou il y a les df qui ne sont pas satisafite 
+    #dejafaitNSD=0 #pour savoir si on a déja fait une methode 
     #Il faudrait que tabNSD soit propre a chauqe table ou que les tables n'aient pas les mêmes attributs sino il y a un risque d'erreurs 
 
     def do_exit(self, arg):
@@ -135,11 +135,10 @@ class Shell(cmd.Cmd):
 
         l = self.db_object.depTab
         arg_tab=sep(arg)
-        self.dejafaitNSD=1
         tabD=[]
         tabG=[]
-        self.tabNSD=[]
-        self.tabNSD.append(str(arg_tab[0]))
+        tabNSD=[]
+        tabNSD.append(str(arg_tab[0]))
         tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite
         #On considere qu'on ne selectionne que un attribut à gauche !!!
         r=0 #pour ne toucher que les df qui concerne la table
@@ -160,7 +159,7 @@ class Shell(cmd.Cmd):
                     if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
                         tabDf[k]=tabD[z]
                     if (k in tabDf and tabDf[k]!=tabD[z]): #pb on rentre pas dans cette boucle
-                        self.tabNSD.append(i)
+                        tabNSD.append(i)
                         z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
                     z=z+1
             r=r+1
@@ -168,11 +167,11 @@ class Shell(cmd.Cmd):
             tabG=[]
             tabDf={}
             #pas oublier de vider les tableaux et le dico
-        if (len(self.tabNSD)>1):    
+        if (len(tabNSD)>1):    
             print("It's the not satisfied functional dependencies")
-            length=len(self.tabNSD)
+            length=len(tabNSD)
             for m in range(1,length):
-                self.tabNSD[m].__str__()
+                tabNSD[m].__str__()
                 #print(self.tabNSD[m])
         else:
             print("There is no functional dependencies")

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/putDataBaseHere/test2.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dep.py" beforeDir="false" afterPath="$PROJECT_DIR$/dep.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +30,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/putDataBaseHere" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\goffi\git\projet_BDDI-python-\putDataBaseHere" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -291,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576690825985</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="updating showNSD2">
+      <created>1576789372230</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1576789372230</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -311,18 +324,19 @@
     <MESSAGE value="fixing indent error" />
     <MESSAGE value="fixing BCNF (yes again...)" />
     <MESSAGE value="fixing errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing errors" />
+    <MESSAGE value="updating showNSD2" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating showNSD2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576324665305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576324665305" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576690825414">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576789371566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="99" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1576678108539" />
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576690825414" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576789371566" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -376,11 +390,11 @@
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576748401463" />
     <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576774984346" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576691209406">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576789403041">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="218" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1576678122118" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576691209406" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576789403041" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576789247184">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

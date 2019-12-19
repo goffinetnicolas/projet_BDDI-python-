@@ -60,7 +60,7 @@ class DataBase:
                 self.connection.commit()
                 self.depTab.append(dep_object)
                 print("New functional dependency added:")
-                dep_object.__str__()
+                print(dep_object.__str__())
 
             except:
                 print("Error, the attribute(s) or the table indicated do not exist")
@@ -83,7 +83,7 @@ class DataBase:
                 self.depTab.append(dep_object)
                 print("")
                 print("New functional dependency added:")
-                dep_object.__str__()
+                print(dep_object.__str__())
 
 
             except Exception as e:
@@ -265,15 +265,10 @@ class DataBase:
                     att_obtained.append(dep1.lhs)
 
                 while (not compareList(att_list,att_obtained)):
-                    print("beginning of the loop with att_list=",att_list," and att_obtained=",att_obtained)
                     check_list = copy.deepcopy(att_obtained) # title,artistid
-                    print("check_list=",check_list)
                     for dep2 in table_dep_list:
                         if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):
                             att_obtained.append(dep2.rhs)
-                            print(dep2.rhs+" has been added to att_obtained")
-                    print("att_obtained is now =",att_obtained)
-                    print("check_list is now =",check_list)
                     if (compareList(check_list, att_obtained)):
                         print("")  # space
                         print(table + " is not in BCNF :(")
@@ -297,7 +292,7 @@ class DataBase:
         pass
 
     def __str__(self):
-        print(self.db_name)
+        return self.db_name
 
 def insert(s):
     a=s.split()

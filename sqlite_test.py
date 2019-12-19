@@ -5,8 +5,7 @@ con = sqlite3.connect('putDataBaseHere/test.db')
 
 c = con.cursor()
 
-c.execute("INSERT INTO FuncDep VALUES (:table_name, :lhs, :rhs)",
-                                    ("albums", "ArtistId Title", "AlbumId"))
+c.execute("SELECT * FROM albums")
 
 print(c.fetchall())
 

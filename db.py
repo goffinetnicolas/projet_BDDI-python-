@@ -38,6 +38,7 @@ class DataBase:
         table_name_arg = dep_object.table_name
         lhs_arg = dep_object.lhs  # could be a string or a list
         rhs_arg = dep_object.rhs # always a string
+
         if(isinstance(lhs_arg, list)):
             lhs_arg_tab=lhs_arg
             try:
@@ -45,7 +46,7 @@ class DataBase:
                     if(dep_object.__eq__(i)):
                         print("Error, the functional dependency already exists")
                         print("")  # space
-                        return 0 # we don't want to execute the rest of the function
+                        return 0  # we don't want to execute the rest of the function
 
 
                 for i in lhs_arg_tab:
@@ -99,13 +100,14 @@ class DataBase:
         table_name_arg = dep_object.table_name
         lhs_arg = dep_object.lhs  # could be a string or a list
         rhs_arg = dep_object.rhs  # always a string
+        print("removeDep executed")
 
         if(isinstance(lhs_arg, list)):
             lhs_string = extract(lhs_arg)
             current_dep_tab = self.depTab
 
             if (not memberOf(dep_object, current_dep_tab)):
-                print("")  # space
+
                 print("Error, The arguments indicated are not in the functional dependencies")
                 print("")  # space
             else:
@@ -117,7 +119,7 @@ class DataBase:
                                      {'table_name': table_name_arg, 'lhs': lhs_string, 'rhs': rhs_arg})
                 self.connection.commit()
 
-                print("")  # space
+
                 print("[" + table_name_arg + ": {" + lhs_string + "} --> " + rhs_arg
                     + "] has been successfully removed from the functional dependencies")
                 print("")  # space
@@ -138,6 +140,82 @@ class DataBase:
                 print("")  # space
                 print("[" + table_name_arg + ": " + lhs_arg + " --> " + rhs_arg
                       + "] has been successfully removed from the functional dependencies")
+
+    def showNSD2(self, table):
+        not_satisfied = []
+        dep_list = self.depTab
+        table_dep_list = []  # total list of dependencies of the indicated table
+
+        for dep in dep_list:
+            if (dep.table_name == table):
+                table_dep_list.append(dep)
+
+        for dep in table_dep_list:
+            satisfy = True
+            lhs = dep.lhs
+            rhs = dep.rhs  # rhs = "Title"
+            if (isinstance(lhs, list)):
+                lhs_list = lhs  # lhs_list =["AlbumsId", "ArtistId"]
+                lhs_number = len(lhs_list)  # lhs_number = 2
+                pos_tab = []  # pos_tab= [0,2]
+                for lhs in lhs_list:
+                    position = self.find_attribute_position(lhs, table)
+                    pos_tab.append(position)
+                self.command.execute("""SELECT * FROM """ + table)
+                result = self.command.fetchall()  # result =[(1,"For those...",1),(2,"Balls to the walls",2),(3,"Restless and...",2),...]
+                for line1 in result:
+                    for line2 in result:
+                        cnt = 0 # cnt count if all the lhs are the same
+                        for i in range(lhs_number):
+                            if (line1[pos_tab[i]] == line2[pos_tab[i]]):
+                                cnt = cnt + 1
+                        if (cnt == lhs_number):
+                            rhs_pos = self.find_attribute_position(rhs, table)
+                            if (line1[pos_tab[rhs_pos]] != line2[pos_tab[rhs_pos]]):
+                                satisfy = False
+                                not_satisfied.append(dep)
+
+                if (satisfy == False):
+                    print("")  # space
+                    print("The functional dependency: [" + dep.table_name + ": " + dep.lhs_rep + " --> " + dep.rhs +
+                          "] is not satisfied ")
+                    print("")  # space
+
+            else:
+                lhs_pos = self.find_attribute_position(lhs, table)
+                rhs_pos = self.find_attribute_position(rhs, table)
+                self.command.execute("""SELECT * FROM """ + table)
+                result = self.command.fetchall()
+                for line1 in result:
+                    for line2 in result:
+                        if (line1[lhs_pos] == line2[lhs_pos]):
+                            if (line1[rhs_pos] != line2[rhs_pos]):
+                                satisfy = False
+                                not_satisfied.append(dep)
+
+                if (satisfy == False):
+                    print("")  # space
+                    print("The functional dependency: [" + dep.table_name + ": " + dep.lhs_rep + " --> " + dep.rhs +
+                          "] is not satisfied ")
+                    print("")  # space
+
+        if (satisfy == True):
+            print("")  # space
+            print("All the functional dependencies are satisfied")
+            print("")  # space
+
+    def find_attribute_position(self, lhs, table):
+        self.command.execute("""SELECT """ + lhs + """ FROM """ + table) # ("title of a music")
+        result = self.command.fetchone()
+        print(result)
+        self.command.execute("""SELECT * FROM """ + table)
+        result2 = self.command.fetchall()
+        print(result2)
+        for res in result2:
+            if(result in res):
+                pass
+
+
 
 
     def checkBCNF(self, table):

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/py_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dep.py" beforeDir="false" afterPath="$PROJECT_DIR$/dep.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/putDataBaseHere/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
@@ -144,10 +148,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.sqlite_test" />
-        <item itemvalue="Python.py_test" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.db" />
+        <item itemvalue="Python.py_test" />
+        <item itemvalue="Python.sqlite_test" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -333,25 +337,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576438191958" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1576706830057">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1576753517081">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576678072542" />
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576753517081" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576706830057" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1576706830056">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1576753517079">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576678072539" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576753517079" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576706830056" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1576706830056">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1576753517079">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576678072537" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576753517079" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576706830056" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1576706830056">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1576753517080">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576678072540" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576753517080" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576706830056" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1576261247535">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -373,10 +377,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="841" y="241" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576257337848" />
-    <state x="305" y="103" key="SettingsEditor" timestamp="1576689208902">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="229" y="89" key="SettingsEditor" timestamp="1576748401463">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576677923441" />
+    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576748401463" />
     <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576689208902" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576691209406">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -395,9 +399,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576612997545" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576236039651">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="467" y="195" width="670" height="587" key="search.everywhere.popup" timestamp="1576752147862">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="467" y="195" width="670" height="587" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1576752147862" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1576236039651" />
   </component>
 </project>

@@ -68,7 +68,6 @@ class Shell(cmd.Cmd):
                   "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs' ")
             return 0
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
-        print(arg_tab)
 
         if (self.db_object == None):
             print("")  # space
@@ -100,25 +99,15 @@ class Shell(cmd.Cmd):
 
         arg_tab=sep(arg)
         if (self.db_object == None):
-            print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
         if (len(arg_tab) < 3):
-            print("")  # space
             print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             print("")  # space
         else:
             compare_dep = Dep(self.db_object, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.removeDep(compare_dep)
 
-    def do_removeAllDep(self, arg):
-        if (self.db_object == None):
-            print("")  # space
-            print("Error, you must connect a data base file")
-            print("")  # space
-        else:
-            for i in self.db_object.depTab:
-                self.db_object.removeDep(i)
 
     def do_showDep(self, arg):
 
@@ -126,8 +115,8 @@ class Shell(cmd.Cmd):
 
         if (self.db_object == None):
             print("Error, you must connect a data base file")
+            print("") # space
         else:
-            print("")  # space
             l = self.db_object.depTab
             if (l == []):
                 print("There is no functional dependencies yet, "
@@ -185,9 +174,21 @@ class Shell(cmd.Cmd):
             print("It's the not satisfied functional dependencies")
             length=len(self.tabNSD)
             for m in range(1,length):
-                print(self.tabNSD[m])
+                m.__str__()
         else:
-            print("There is no functional dependencies")        
+            print("There is no functional dependencies")
+
+    def do_showNSD2(self, arg):
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            print("")  # space
+
+        if(arg==""):
+            print("Error, you must enter a table name")
+            print("")  # space
+
+        else:
+            self.db_object.showNSD2(arg)
 
     #recopier le code de mon gsm pour LCD 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies

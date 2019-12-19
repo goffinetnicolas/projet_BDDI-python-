@@ -41,9 +41,9 @@ def compareList(list1, list2):
             return False
     return True
 
-l1=["a", "z", "e", "r"]
-l2=["a", "e"]
-print(l1.sort() == l2.sort())
+l1=("bonjou")
+l2=("yoyo", "test", "bonjour")
+print(l1 in l2)
 
 
 

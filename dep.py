@@ -33,10 +33,9 @@ class Dep:
             return stn == otn and sl == ol and srhs == orhs
 
     def __str__(self):
-        return ("data_base: "+ str(self.dbname)+"\n"+"table: "+ str(self.table_name) +"\n"+"Dep: "+ str(self.lhs_rep) +" --> "+str(self.rhs)+"\n")
-        '''print("data_base: ", self.dbname)
+        print("data_base: ", self.dbname)
         print("table: ", self.table_name)
-        print("Dep: ", self.lhs_rep, " --> ", self.rhs , "\n")'''
+        print("Dep: ", self.lhs_rep, " --> ", self.rhs , "\n")
 
 def compare_list(a,b):
     c1=[]

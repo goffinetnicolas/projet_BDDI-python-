@@ -274,7 +274,7 @@ class Shell(cmd.Cmd):
                             lCSOA.append(str(j.lhs))  
                             #print("i.rhs :"+i.rhs)
                         '''if i.lhs==j.rhs:
-                            lCSOA.append(str(i.rhs))'''    
+                            lCSOA.append(str(i.v))'''    
                        # i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
                         '''if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
                             i.rhs=j.rhs'''
@@ -321,12 +321,20 @@ class Shell(cmd.Cmd):
                         # si on inerse pas et qu'on recoit 1->2 2->3               
         for z in lUID:
             print(z) 
+        print(l)    
         print("If you want to delete them, please press 1 but if you don't want press 2")
         y=input()
-        if y==1:
-            noDoublons(lNameDep,lUID) #CA ne supprime pas 
+        if y=="1":
+            '''noDoublons(lNameDep,lUID) #ca ne supprime pas On utilise remove sur deptab (c'est la seule solution )
             for m in lNameDep:
-                print(m)      
+                print(m)      '''
+            for v in self.db_object.depTab:
+                print(v.table_name==nameT)
+                print(v in lUID)
+                if v.table_name==nameT and v in lUID:
+                    remove(v)
+                    print(v)
+
 
         # Demander si on veut supprimer et utiliser noDoublons pour le faire     
 

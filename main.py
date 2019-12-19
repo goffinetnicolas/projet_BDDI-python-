@@ -126,7 +126,7 @@ class Shell(cmd.Cmd):
                 print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
             print("")  # space
 
-    def do_showNSD(self, arg):  # NSD = Not Satisfied Dependencies
+    def do_showNSD(self, arg):  # Maxime's version
 
         """ Compute and show the not satisfied functional dependencies
         The user type 'showNSD table_name' """
@@ -176,7 +176,7 @@ class Shell(cmd.Cmd):
         else:
             print("There is no functional dependencies")
 
-    def do_showNSD2(self, arg):
+    def do_showNSD2(self, arg): # Nicolas's version
         if (self.db_object == None):
             print("Error, you must connect a data base file")
             print("")  # space

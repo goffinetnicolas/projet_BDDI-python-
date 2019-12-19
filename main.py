@@ -341,6 +341,13 @@ class Shell(cmd.Cmd):
 
         """ Compute and show the key(s) of the functional dependencies """
 
+        table=arg
+        if(table==""):
+            print("Error, you have to type a table as argument")
+            return 0
+        else:
+            self.db_object.showKey(table)
+
     def do_showSuperKey(self, arg):
 
         """ Compute and show the super-key(s) of the functional dependencies """

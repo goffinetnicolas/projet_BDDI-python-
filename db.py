@@ -290,6 +290,9 @@ class DataBase:
             print("")  # space
             return True
 
+    def showKey(self, table):
+        pass
+
     def find_table_attribute(self, table):
         self.command.execute("""SELECT * from """+table)
         att_list = [description[0] for description in self.command.description]

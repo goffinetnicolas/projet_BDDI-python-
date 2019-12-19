@@ -6,11 +6,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dep.py" beforeDir="false" afterPath="$PROJECT_DIR$/dep.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/putDataBaseHere/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqlite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,28 +373,28 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="841" y="241" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576257337848" />
-    <state x="229" y="89" key="SettingsEditor" timestamp="1576748401463">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="305" y="103" key="SettingsEditor" timestamp="1576774984346">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576748401463" />
-    <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576689208902" />
+    <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576774984346" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576691209406">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="218" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1576678122118" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576691209406" />
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576700756517">
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576774978436">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576700756517" />
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576774978436" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576257310697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576257310697" />
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576612997545">
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576777604068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576612997545" />
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576777604068" />
     <state x="467" y="195" width="670" height="587" key="search.everywhere.popup" timestamp="1576752147862">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

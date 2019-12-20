@@ -1,4 +1,5 @@
 import copy
+import itertools
 import sqlite3
 
 from dep import Dep
@@ -173,8 +174,6 @@ class DataBase:
                                 cnt = cnt + 1
                         if (cnt == lhs_number):
                             rhs_pos = self.find_attribute_position(rhs, table)
-                            print(line1)
-                            print(rhs_pos)
                             if ((line1[rhs_pos] != line2[rhs_pos])
                                     and (not_member_of(dep, not_satisfied))
                                     and line1 != line2):
@@ -200,17 +199,20 @@ class DataBase:
                       "] is not satisfied")
 
     def find_attribute_position(self, lhs, table):
+
         self.command.execute("""SELECT """ + lhs + """ FROM """ + table) # ("title of a music")
-        result = self.command.fetchone()
-        print(result)
+        tup_result = self.command.fetchone()
+
         self.command.execute("""SELECT * FROM """ + table)
-        result2 = self.command.fetchall()
-        print(result2)
-        for res in result2:
-            if(result in res):
-                pass
+        tup_list_result = self.command.fetchall()
 
-
+        for tup in tup_list_result:
+            a=0
+            for string in tup:
+                if(string == tup_result[0]):
+                    return a
+                else:
+                    a=a+1
 
 
     def checkBCNF(self, table):
@@ -281,12 +283,58 @@ class DataBase:
             return True
 
     def showKey(self, table):
-        pass
+        l = self.depTab
+        table_dep_list = []
+        att_list = self.find_table_attribute(table)  # total attribute list of the table
+
+        for dep in l:  # extract the functional dependencies linked to the table
+            if (dep.table_name == table):
+                table_dep_list.append(dep)
+
+        if (len(table_dep_list) == 0):
+            print("")  # space
+            print("There is not functional dependencies linked to the indicated table")
+            print("")  # space
+            return 0
+
+        key_list = []
+
+        for L in range(0, len(att_list) + 1):
+            for potential_key in itertools.combinations(att_list, L):
+                if(self.check_all_attributes_obtained(table_dep_list, att_list, list(potential_key))):
+                    key_list.append(list(potential_key))
+
+        if(len(key_list)>0):
+            print("Key list:")
+            for key in key_list:
+                print(key)
+
+        else:
+            print("No key found")
+
+
+
+    def check_all_attributes_obtained(self, dep_list, total_attribute_list, potential_key):
+        # check if with the potential key list, we can reach all the attributes in total-attribute using dep_list
+        while(not compareList(potential_key,total_attribute_list)):
+            compare_key = copy.deepcopy(potential_key)
+            for dep in dep_list:
+                if((dep.lhs,potential_key) and dep.rhs not in potential_key):
+                    potential_key.append(dep.rhs)
+            if(compare_key == potential_key):
+                return False
+        return True
+
 
     def find_table_attribute(self, table):
-        self.command.execute("""SELECT * from """+table)
-        att_list = [description[0] for description in self.command.description]
-        return att_list
+        try:
+            self.command.execute("""SELECT * from """+table)
+            att_list = [description[0] for description in self.command.description]
+            return att_list
+
+        except:
+            print(table+" does not exist in the database")
+
 
     def close(self):
         pass

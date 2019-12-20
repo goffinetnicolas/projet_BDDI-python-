@@ -32,11 +32,9 @@ class Shell(cmd.Cmd):
         """ The user type 'connect data_base.db' to create a DataBase object connected with the file indicated """
 
         if (arg == ""):
-            print("")  # space
             print("please, enter a data base file")
             print("")  # space
             return False
-        print("")  # space
         print("connected to " + arg)
         print("")  # space
         newDB = DataBase(arg)
@@ -45,15 +43,13 @@ class Shell(cmd.Cmd):
     def do_disconnect(self, arg):
 
         """The user type 'disconnect' to remove the data base file connected"""
-        tabNSD=None
+
         if (self.db_object == None):
-            print("")  # space
             print("Error, no data base file connected")
             print("")  # space
         else:
             print("")  # space
             print("Disconnected to " + self.db_object.db_name)
-            print("")  # space
             self.db_object = None
 
     def do_addDep(self, arg):  # first argument is table name, second is lhs and third is rhs
@@ -70,20 +66,17 @@ class Shell(cmd.Cmd):
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
 
         if (self.db_object == None):
-            print("")  # space
             print("Error, you must connect a data base file")
             print("")  # space
             return 0
 
         if (len(arg_tab) < 3):
-            print("")  # space
             print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             print("")  # space
             return 0
 
         if(isinstance(arg_tab[1], list)):
             if(verify_recurrent_lhs(arg_tab[1])):
-                print("")  # space
                 print("Error, you have types 2 identical attributes in lhs")
                 print("")  # space
                 return 0
@@ -135,8 +128,6 @@ class Shell(cmd.Cmd):
 
         l = self.db_object.depTab
         arg_tab=sep(arg)
-        tabD=[]
-        tabG=[]
         tabNSD=[]
         tabNSD.append(str(arg_tab[0]))
         tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite
@@ -163,10 +154,7 @@ class Shell(cmd.Cmd):
                         z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
                     z=z+1
             r=r+1
-            tabD=[]
-            tabG=[]
-            tabDf={}
-            #pas oublier de vider les tableaux et le dico
+
         if (len(tabNSD)>1):    
             print("It's the not satisfied functional dependencies")
             length=len(tabNSD)
@@ -384,6 +372,13 @@ class Shell(cmd.Cmd):
 
         """ Compute and show the super-key(s) of the functional dependencies """
 
+        table = arg
+        if (table == ""):
+            print("Error, you have to type a table as argument")
+            return 0
+        else:
+            key_list = self.db_object.showKey(table)
+            self.db_object.showSuperKey(key_list)
 
 def sep(arg):
     res = []

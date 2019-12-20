@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet_BDDI-python-.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/putDataBaseHere/test2.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/py_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -393,10 +394,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="841" y="241" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576257337848" />
-    <state x="305" y="103" key="SettingsEditor" timestamp="1576774984346">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="229" y="89" key="SettingsEditor" timestamp="1576861832932">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576748401463" />
+    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576861832932" />
     <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576774984346" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576789676049">
       <screen x="0" y="0" width="1920" height="1040" />

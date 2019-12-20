@@ -82,10 +82,9 @@ class DataBase:
                                     (table_name_arg, lhs_arg, rhs_arg))
                 self.connection.commit()
                 self.depTab.append(dep_object)
-                print("")
                 print("New functional dependency added:")
                 print(dep_object.__str__())
-
+                print("")  # space
 
             except Exception as e:
                 print(e)
@@ -101,16 +100,15 @@ class DataBase:
         table_name_arg = dep_object.table_name
         lhs_arg = dep_object.lhs  # could be a string or a list
         rhs_arg = dep_object.rhs  # always a string
-        print("removeDep executed")
+        current_dep_tab = self.depTab
 
         if(isinstance(lhs_arg, list)):
             lhs_string = extract(lhs_arg)
-            current_dep_tab = self.depTab
 
             if (not_member_of(dep_object, current_dep_tab)):
-
                 print("Error, The arguments indicated are not in the functional dependencies")
                 print("")  # space
+
             else:
                 for i in current_dep_tab:
                     if (i.__eq__(dep_object)):
@@ -124,12 +122,12 @@ class DataBase:
                 print("[" + table_name_arg + ": {" + lhs_string + "} --> " + rhs_arg
                     + "] has been successfully removed from the functional dependencies")
                 print("")  # space
+
         else:
-            current_dep_tab = self.depTab
             if (not_member_of(dep_object, current_dep_tab)):
-                print("")  # space
                 print("Error, The arguments indicated are not in the functional dependencies")
                 print("")  # space
+
             else:
                 for i in current_dep_tab:
                     if (i.__eq__(dep_object)):
@@ -186,8 +184,10 @@ class DataBase:
                 result = self.command.fetchall()
                 for line1 in result:
                     for line2 in result:
-                        if (line1[lhs_pos] == line2[lhs_pos]):
-                            if ((line1[rhs_pos] != line2[rhs_pos]) and (not_member_of(dep, not_satisfied))):
+                        if (line1[lhs_pos] == line2[lhs_pos] and line1 != line2):
+                            if ((line1[rhs_pos] != line2[rhs_pos])
+                                    and (not_member_of(dep, not_satisfied)
+                                    and line1 != line2)):
                                 not_satisfied.append(dep)
 
         if (not_satisfied == []):
@@ -216,21 +216,25 @@ class DataBase:
 
 
     def checkBCNF(self, table):
+
+        """ Triggered with the command 'checkBCNF',
+         this algorithm check if all the functional dependencies can gives t
+         he entire attribute list of the indicated table """
+
         l = self.depTab
-        table_dep_list = []  # = [dep1, dep2, dep3]
+        table_dep_list = []  # the dep list of the indicated table
 
         for dep in l:  # extract the functional dependencies linked to the table
             if (dep.table_name == table):
                 table_dep_list.append(dep)
 
         if (len(table_dep_list) == 0):
-            print("")  # space
             print("There is not functional dependencies linked to the indicated table")
             print("")  # space
             return 0
 
         att_list = self.find_table_attribute(table)  # total attribute list of the table
-        # att_list = title, artistid, albumid
+
         if(len(table_dep_list) == 1):
 
             att_obtained = []  # attributes that we will obtain thanks to functional dependencies
@@ -240,24 +244,24 @@ class DataBase:
             if (isinstance(lhs, list)):
                 for lhs_string in lhs:
                     att_obtained.append(lhs_string)
+
             else:
                 att_obtained.append(lhs)
 
             att_obtained.append(rhs)
 
-            if(not compareList(att_list,att_obtained)):
-                print("")  # space
+            if(not compareList(att_list,att_obtained)):  # compareList returns True if the lists are the same
                 print(table + " is not in BCNF :(")
                 print("")  # space
                 return False
-            print("")  # space
+
             print(table + " is in BCNF :)")
             print("")  # space
             return True
+
         else:
             for dep1 in table_dep_list:
                 att_obtained = []  # attributes that we will obtain thanks to functional dependencies
-                # att_obtained = title,artistid,albumid
                 att_obtained.append(dep1.rhs)
 
                 if (isinstance(dep1.lhs, list)):
@@ -266,18 +270,18 @@ class DataBase:
                 else:
                     att_obtained.append(dep1.lhs)
 
-                while (not compareList(att_list,att_obtained)):
-                    check_list = copy.deepcopy(att_obtained) # title,artistid
+                while (not compareList(att_list,att_obtained)):  # compareList returns True if the lists are the same
+                    check_list = copy.deepcopy(att_obtained)
+
                     for dep2 in table_dep_list:
-                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):
+                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):  # must verify
                             att_obtained.append(dep2.rhs)
-                    if (compareList(check_list, att_obtained)):
-                        print("")  # space
+
+                    if (compareList(check_list, att_obtained)):  # compareList returns True if the lists are the same
                         print(table + " is not in BCNF :(")
                         print("")  # space
                         return False
 
-            print("")  # space
             print(table+" is in BCNF :)")
             print("")  # space
             return True
@@ -295,31 +299,35 @@ class DataBase:
             print("")  # space
             print("There is not functional dependencies linked to the indicated table")
             print("")  # space
-            return 0
+            return []
 
         key_list = []
 
-        for L in range(0, len(att_list) + 1):
+        for L in range(0, len(att_list) + 1):  # test all possible attribute combinations
             for potential_key in itertools.combinations(att_list, L):
                 if(self.check_all_attributes_obtained(table_dep_list, att_list, list(potential_key))):
+                    #  this function check if with the current attribute combination,
+                    #  we can reach all attributes of the table
                     key_list.append(list(potential_key))
 
         if(len(key_list)>0):
             print("Key list:")
             for key in key_list:
                 print(key)
+            return key_list
 
         else:
             print("No key found")
-
+            return key_list
 
 
     def check_all_attributes_obtained(self, dep_list, total_attribute_list, potential_key):
-        # check if with the potential key list, we can reach all the attributes in total-attribute using dep_list
+        #  this function check if with the current attribute combination,
+        #  we can reach all attributes of the table
         while(not compareList(potential_key,total_attribute_list)):
             compare_key = copy.deepcopy(potential_key)
             for dep in dep_list:
-                if((dep.lhs,potential_key) and dep.rhs not in potential_key):
+                if((dep.lhs,potential_key) and dep.rhs not in potential_key):  # verify this condition
                     potential_key.append(dep.rhs)
             if(compare_key == potential_key):
                 return False
@@ -335,6 +343,9 @@ class DataBase:
         except:
             print(table+" does not exist in the database")
 
+
+    def showSuperKey(self, key_list):
+        pass
 
     def close(self):
         pass
@@ -355,13 +366,13 @@ def extract(s):
     l=len(res)-1
     return res[:l]
 
-def not_member_of(depObject, depList): # not working correctly
+def not_member_of(depObject, depList):  # returns True if the dep is not in the dep list
     for i in depList:
         if(depObject.__eq__(i)):
             return False
     return True
 
-def detect(string_or_list_lhs, string_list):
+def detect(string_or_list_lhs, string_list):  # returns True if the lhs is in the string list
     if(isinstance(string_or_list_lhs, list)):
         lhs_list=string_or_list_lhs
         for lhs in lhs_list:

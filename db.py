@@ -452,23 +452,17 @@ class DataBase:
         l=self.depTab
         other=self.depTab
         lUID=[] #pour avoir ceux qui ne sont pas correcte 
-        #lNameDep=[] #pour avoir juste le nom des dep 
-        """for h in l:
-            if (isinstance(h.lhs,list)):
-                h.lhs=", ".join(h.lhs)
-            lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
-        print(lNameDep)"""
         for i in l:  
             a_irhs=i.rhs  
             for j in other: 
                 if j.table_name==table and i.table_name==table and (i.rhs==j.lhs or i.lhs==j.rhs):
-                    lUID.append(str(i.lhs)+" --> "+str(i.rhs))
+                    #lUID.append(str(i.lhs)+" --> "+str(i.rhs))
                     if (i.rhs==j.lhs):
                         x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
                         i.rhs=j.rhs
                     if (i.lhs==j.rhs):
                         x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
-                        #i.rhs=a_irhs
+                        i.rhs=a_irhs
                     if x not in lUID: 
                         lUID.append(x)   
         print(lUID)                
@@ -478,7 +472,7 @@ class DataBase:
         y=input()
         doublons=[]
         if y=="1":
-            for v in l:
+            for v in lUID:
                 if (isinstance(v.lhs,list)):
                     v.lhs=", ".join(v.lhs)
                 if v.table_name==table and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:

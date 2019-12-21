@@ -327,12 +327,11 @@ class DataBase:
         while(not compareList(potential_key,total_attribute_list)):
             compare_key = copy.deepcopy(potential_key)
             for dep in dep_list:
-                if((dep.lhs,potential_key) and dep.rhs not in potential_key):  # verify this condition
+                if(detect(dep.lhs,potential_key) and dep.rhs not in potential_key):  # verify this condition
                     potential_key.append(dep.rhs)
             if(compare_key == potential_key):
                 return False
         return True
-
 
     def find_table_attribute(self, table):
         try:

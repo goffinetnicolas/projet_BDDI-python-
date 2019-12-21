@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -317,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576928474733</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="adding 3NF">
+      <created>1576935903246</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1576935903246</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -340,18 +346,19 @@
     <MESSAGE value="updating showNSD2" />
     <MESSAGE value="fixing __str__() errors" />
     <MESSAGE value="fixing a little error in showKey" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing a little error in showKey" />
+    <MESSAGE value="adding 3NF" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding 3NF" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576926970578">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576926970578" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576928474012">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1576935902653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="99" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1576678108539" />
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576928474012" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576935902653" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -405,11 +412,11 @@
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576861832932" />
     <state x="305" y="103" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576925714900" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576928479949">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1576935912791">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="218" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1576678122118" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576928479949" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576935912791" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576931465303">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

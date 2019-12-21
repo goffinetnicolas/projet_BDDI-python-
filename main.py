@@ -344,7 +344,10 @@ class Shell(cmd.Cmd):
             print("Error, you have to type a table as argument")
             return 0
         else:
-            self.db_object.check3NF(table)
+            if(self.db_object.check3NF(table) == True):
+                print(table, " is in 3NF")
+            else:
+                print(table, " is not in 3NF")
 
     def do_showKey(self, arg):
 

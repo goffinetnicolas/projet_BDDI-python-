@@ -422,9 +422,13 @@ class DataBase:
         lCSOA=[] #liste pour ajouter la fermeture 
         l=self.depTab
         other=self.depTab #pour la transitivité 
-        lCSOA.append(attribut) #c'est toujours vrai ça 
+        x=attribut
+        if isinstance(attribut,list):
+            x=", ".join(attribut)
+        print(x)   
+        lCSOA.append(x) #c'est toujours vrai ça 
         for i in l:
-            if i.lhs==attribute:
+            if i.lhs==attribut:
                 lCSOA.append(str(i.rhs))  
             if i.table_name==table : #and i.rhs not in lCSOA:#and i.lhs==nameAttribute and i.rhs not in lCSOA: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
                 for j in other[1:]: #C'est pour traiter la transitivité
@@ -433,9 +437,13 @@ class DataBase:
                             lCSOA.append(str(j.rhs))
                             lCSOA.append(str(i.rhs)) 
                         if i.lhs==j.rhs and j.lhs not in lCSOA:
-                            lCSOA.append(str(j.lhs))  
+                            if isinstance(j.lhs,list):
+                                y=", ".join(j.lhs)
+                                lCSOA.append(y)
+                            else:
+                                lCSOA.append(str(j.lhs))        
                                            
-        print("The closure of "+attribut+" is : \n")                    
+        print("The closure of "+x+" is : \n")                    
         for nom in set(lCSOA):
             print(nom) 
 

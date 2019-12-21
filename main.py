@@ -183,7 +183,7 @@ class Shell(cmd.Cmd):
             print("Error you must enter a table name and an attribute")
             print("")    
         else:
-            self.db_object.showLCD(arg_tab[0],arg_tab[1])
+            self.db_object.showCOAS(arg_tab[0],arg_tab[1])
         
         
 #a faire pui simplifier le code 

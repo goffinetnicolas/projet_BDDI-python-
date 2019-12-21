@@ -290,19 +290,19 @@ class Shell(cmd.Cmd):
         lNameDep=[] #pour avoir juste le nom des dep 
         for h in l:
             lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
-            print(type(h.lhs))
+            #print(type(h.lhs))
             if (isinstance(h.lhs,list)):
-                #h.lhs=", ".join(h.lhs)
-                for r in str(h):
-                    lennn=lenn+int(len(r))
-                lenn=int(len(str(h)))-lennn+6
-                print(lenn)    
+                h.lhs=", ".join(h.lhs)
+                #print(lenn) 
+            #print(h.lhs)       
             #print(lenn)    
             #lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
-            print(str(h)[lenn:])
+            #print(str(h)[lenn:])
             #print(len(", ".join(l[7].lhs)))
             #print(len(h.lhs))
-            lNameDep.append(str(h)[lenn])  
+            lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
+            #lNameDep.append(str(h)[lenn:])
+            #print(str(h.lhs)+" --> "+str(h.rhs))  
             #print(str(h)[lenn:])
             #print(str(h)[36:len(str(h))])
         for i in l:  
@@ -332,13 +332,11 @@ class Shell(cmd.Cmd):
             for m in lNameDep:
                 print(m)      '''
             for v in self.db_object.depTab:
-                #print(v.table_name==nameT)
-                #print(v in lUID)
-                #print(str(v)[32:len(str(h))])
-                lenn1=len(str(v))-(len(v.rhs)+len(v.lhs)+5)
-                if v.table_name==nameT and str(v)[lenn1] in lUID:
-                    remove(v)
-                    print(v)
+                if (isinstance(v.lhs,list)):
+                    v.lhs=", ".join(v.lhs)
+                if v.table_name==nameT and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
+                    self.db_object.depTab.remove(v)
+                    print(self.db_object.depTab)
 
 
         # Demander si on veut supprimer et utiliser noDoublons pour le faire     

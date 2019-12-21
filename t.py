@@ -12,6 +12,7 @@ def argAttribute(a):
 
 x=["3ABCDE", "un}"]
 y=["hllo"]
+print(", ".join(x))
 print(argAttribute(y))
 #print(argAttribute(x[1:len(x)-1]))
       

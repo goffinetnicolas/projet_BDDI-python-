@@ -368,9 +368,9 @@ class DataBase:
             if i.table_name==table:
                 attribute1=argAttribute(l[r].lhs) #le nom de l'attribut à gauche de la fléche
                 attribute2=str(l[r].rhs) #le nom de l'attribut à droite de la flèche
-                self.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
+                self.command.execute("""SELECT """+attribute2 +""" FROM  """ + table) #on considere qu'il n'y a que un attribut pour le moment
                 tabD=self.command.fetchall() #affiche les resultas sous forme de tableaux
-                self.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
+                self.command.execute("""SELECT """+attribute1 +""" FROM  """ + table)
                 tabG=self.command.fetchall()
                 # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte
                 z=0

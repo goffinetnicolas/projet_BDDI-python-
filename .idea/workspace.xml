@@ -4,7 +4,6 @@
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -426,18 +425,18 @@
     </state>
     <state x="414" y="218" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1576678122118" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576936193470" />
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576931465303">
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576943411220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576931465303" />
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576943411220" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576257310697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576257310697" />
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576927410500">
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576944282044">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576927410500" />
+    <state x="640" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576944282044" />
     <state x="467" y="195" width="670" height="587" key="search.everywhere.popup" timestamp="1576752147862">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -231,7 +231,7 @@ class DataBase:
         if (len(table_dep_list) == 0):
             print("There is not functional dependencies linked to the indicated table")
             print("")  # space
-            return 0
+            return False
 
         att_list = self.find_table_attribute(table)  # total attribute list of the table
 
@@ -251,12 +251,8 @@ class DataBase:
             att_obtained.append(rhs)
 
             if(not compareList(att_list,att_obtained)):  # compareList returns True if the lists are the same
-                print(table + " is not in BCNF :(")
-                print("")  # space
                 return False
 
-            print(table + " is in BCNF :)")
-            print("")  # space
             return True
 
         else:
@@ -310,15 +306,7 @@ class DataBase:
                     #  we can reach all attributes of the table
                     key_list.append(list(potential_key))
 
-        if(len(key_list)>0):
-            print("Key list:")
-            for key in key_list:
-                print(key)
-            return key_list
-
-        else:
-            print("No key found")
-            return key_list
+        return key_list
 
 
     def check_all_attributes_obtained(self, dep_list, total_attribute_list, potential_key):
@@ -344,7 +332,33 @@ class DataBase:
 
 
     def showSuperKey(self, key_list):
-        pass
+        not_super_key=[]
+        for key1 in key_list:
+            for key2 in key_list:
+                if(not compareList(key1,key2)):
+                    cnt=0
+                    for att in key1:
+                        if(att in key2):
+                            cnt=cnt+1
+                    if(cnt == len(key1) and key2 not in not_super_key):
+                        not_super_key.append(key2)
+
+        for key in not_super_key:
+            key_list.remove(key)
+
+        return key_list
+
+    def check3NF(self, table):
+        if(self.checkBCNF(table) == True):
+            return True
+        else:
+            super_key_list=self.showSuperKey(table)
+            att_list = self.find_table_attribute(table)
+            for att in att_list:
+                if(att not in super_key_list):
+                    return False
+
+            return True
 
     def close(self):
         pass
@@ -385,7 +399,7 @@ def detect(string_or_list_lhs, string_list):  # returns True if the lhs is in th
         else:
             return False
 
-def compareList(list1, list2):
+def compareList(list1, list2):  # returns True is the list are the same
     a=[]
     b=[]
     for i in list1:

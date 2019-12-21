@@ -282,6 +282,7 @@ class Shell(cmd.Cmd):
 
         """ Compute and show functional dependencies that are unnecessary or inconsistent,
         the user can delete them if he wishes """
+
         l=self.db_object.depTab
         other=self.db_object.depTab
         arg_tab=sep(arg)
@@ -325,14 +326,25 @@ class Shell(cmd.Cmd):
         """ Check if the data base file in in BCNF,
         user has to type the command 'checkBCNF table_name' """
 
-        if(arg==""):
-            print("you have to enter a table")
+        table=arg
+        if(table==""):
+            print("Error, you have to type a table as argument")
             return 0
-        self.db_object.checkBCNF(arg)
+        if(self.db_object.checkBCNF(table) == True):
+            print(table," is in BCNF")
+        else:
+            print(table," is not in BCNF")
 
     def do_check3NF(self, arg):
 
         """ Check if the data base file in in 3NF """
+
+        table = arg
+        if (table == ""):
+            print("Error, you have to type a table as argument")
+            return 0
+        else:
+            self.db_object.check3NF(table)
 
     def do_showKey(self, arg):
 
@@ -343,7 +355,14 @@ class Shell(cmd.Cmd):
             print("Error, you have to type a table as argument")
             return 0
         else:
-            self.db_object.showKey(table)
+            key_list = self.db_object.showKey(table)
+            if(key_list == []):
+                print("No key found")
+            else:
+                print("key list:")
+                for key in key_list:
+                    print(key)
+                print("")  # space
 
     def do_showSuperKey(self, arg):
 
@@ -355,7 +374,14 @@ class Shell(cmd.Cmd):
             return 0
         else:
             key_list = self.db_object.showKey(table)
-            self.db_object.showSuperKey(key_list)
+            super_key_list = self.db_object.showSuperKey(key_list)
+            if (super_key_list == []):
+                print("No super key found")
+            else:
+                print("super-key list:")
+                for key in super_key_list:
+                    print(key)
+                print("")  # space
 
 def sep(arg):
     res = []

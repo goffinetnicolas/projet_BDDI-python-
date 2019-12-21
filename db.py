@@ -274,12 +274,8 @@ class DataBase:
                             att_obtained.append(dep2.rhs)
 
                     if (compareList(check_list, att_obtained)):  # compareList returns True if the lists are the same
-                        print(table + " is not in BCNF :(")
-                        print("")  # space
                         return False
 
-            print(table+" is in BCNF :)")
-            print("")  # space
             return True
 
     def showKey(self, table):

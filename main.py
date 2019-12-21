@@ -345,9 +345,9 @@ class Shell(cmd.Cmd):
             return 0
         else:
             if(self.db_object.check3NF(table) == True):
-                print(table, " is in 3NF")
+                print(table+" is in 3NF")
             else:
-                print(table, " is not in 3NF")
+                print(table+" is not in 3NF")
 
     def do_showKey(self, arg):
 

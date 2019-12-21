@@ -290,24 +290,12 @@ class Shell(cmd.Cmd):
         lNameDep=[] #pour avoir juste le nom des dep 
         for h in l:
             lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
-            #print(type(h.lhs))
             if (isinstance(h.lhs,list)):
                 h.lhs=", ".join(h.lhs)
-                #print(lenn) 
-            #print(h.lhs)       
-            #print(lenn)    
-            #lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
-            #print(str(h)[lenn:])
-            #print(len(", ".join(l[7].lhs)))
-            #print(len(h.lhs))
             lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
-            #lNameDep.append(str(h)[lenn:])
-            #print(str(h.lhs)+" --> "+str(h.rhs))  
-            #print(str(h)[lenn:])
-            #print(str(h)[36:len(str(h))])
         for i in l:  
-            a_irhs=i.rhs  #Il faut etre le deplacer dans la premiere boucle if 
-            for j in other: #C'est pour traiter la transitivité 
+            a_irhs=i.rhs  
+            for j in other: 
                 if j.table_name==nameT and i.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
                     lUID.append(str(i.lhs)+" --> "+str(i.rhs))
                     if (i.rhs==j.lhs):
@@ -316,27 +304,18 @@ class Shell(cmd.Cmd):
                     if (i.lhs==j.rhs):
                         x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
                         i.rhs=a_irhs
-                    '''if(i.lhs==i.rhs):
-                        x=str(i.lhs)+" --> "+str(i.rhs)  ''' 
-                    if x not in lUID: #Je ne comprends pas cette boucle 
-                        lUID.append(x)
-                    #i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
-                        # si on inerse pas et qu'on recoit 1->2 2->3               
+                    if x not in lUID: 
+                        lUID.append(x)   
         for z in lUID:
-            print(z) 
-        #print(l[32:len(str(l))])    
+            print(z)    
         print("If you want to delete them, please press 1 but if you don't want press 2")
         y=input()
         if y=="1":
-            '''noDoublons(lNameDep,lUID) #ca ne supprime pas On utilise remove sur deptab (c'est la seule solution )
-            for m in lNameDep:
-                print(m)      '''
-            for v in self.db_object.depTab:
+            for v in l:
                 if (isinstance(v.lhs,list)):
                     v.lhs=", ".join(v.lhs)
                 if v.table_name==nameT and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
-                    self.db_object.depTab.remove(v)
-                    print(self.db_object.depTab)
+                    l.remove(v)
 
 
         # Demander si on veut supprimer et utiliser noDoublons pour le faire     

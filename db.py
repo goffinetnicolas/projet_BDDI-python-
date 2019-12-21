@@ -91,8 +91,8 @@ class DataBase:
                 print("Error, the attribute(s) or the table indicated do not exist")
                 print("")  # space
 
-    def rmDep(self,Object):
-        
+    
+
 
     def removeDep(self, dep_object):
 

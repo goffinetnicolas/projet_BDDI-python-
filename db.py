@@ -112,7 +112,7 @@ class DataBase:
             else:
                 for i in current_dep_tab:
                     if (i.__eq__(dep_object)):
-                        self.depTab.remove(i)
+                        self.depTab.remove(dep_object)
 
                 self.command.execute("DELETE FROM FuncDep WHERE table_name = :table_name AND lhs = :lhs AND rhs = :rhs",
                                      {'table_name': table_name_arg, 'lhs': lhs_string, 'rhs': rhs_arg})
@@ -131,7 +131,7 @@ class DataBase:
             else:
                 for i in current_dep_tab:
                     if (i.__eq__(dep_object)):
-                        self.depTab.remove(i)
+                        self.depTab.remove(dep_object)
 
                 self.command.execute("DELETE FROM FuncDep WHERE table_name = :table_name AND lhs = :lhs AND rhs = :rhs",
                                      {'table_name': table_name_arg, 'lhs': lhs_arg, 'rhs': rhs_arg})

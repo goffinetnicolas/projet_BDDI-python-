@@ -356,6 +356,129 @@ class DataBase:
 
             return True
 
+    def showNSD(self,table):
+        l=self.depTab
+        #arg_tab=sep(arg)
+        tabNSD=[]
+        tabNSD.append(str(table))
+        tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite
+        #On considere qu'on ne selectionne que un attribut à gauche !!!
+        r=0 #pour ne toucher que les df qui concerne la table
+        for i in l:
+            if i.table_name==table:
+                attribute1=argAttribute(l[r].lhs) #le nom de l'attribut à gauche de la fléche
+                attribute2=str(l[r].rhs) #le nom de l'attribut à droite de la flèche
+                self.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
+                tabD=self.command.fetchall() #affiche les resultas sous forme de tableaux
+                self.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
+                tabG=self.command.fetchall()
+                # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte
+                z=0
+                while (z<len(tabG)):
+                    k=tabG[z]
+                    if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
+                        tabDf[k]=tabD[z]
+                    if (k in tabDf and tabDf[k]!=tabD[z]): #pb on rentre pas dans cette boucle
+                        tabNSD.append(i)
+                        z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
+                    z=z+1
+            r=r+1
+
+        if (len(tabNSD)>1):    
+            print("It's the not satisfied functional dependencies")
+            length=len(tabNSD)
+            for m in range(1,length):
+                print(tabNSD[m])
+        else:
+            print("There is no functional dependencies")    
+
+    def showLCD(self,table):
+        l=self.depTab
+        other=self.depTab
+        lLCD=[]
+        lDF=[]
+        for i in l:
+            lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons
+            a_irhs=i.rhs #pour sauvegarder la prmiere valeur 
+            for j in other:
+                if i.lhs==j.rhs and i.table_name==table and j.table_name==table:
+                    i.rhs=a_irhs
+                    lLCD.append(str(j.lhs)+" --> "+str(i.rhs))
+                if i.table_name==table and j.table_name==table and i.rhs==j.lhs:
+                    lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
+                    i.rhs=j.rhs
+                    #voir cas sur papier avec des chiffres 
+                    #i.rhs=j.rhs
+                            # si on inerse pas et qu'on recoit 1->2 2->3
+        noDoublons(lLCD,lDF) #permet de supprimer les doublons 
+        print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
+        for x in set(lLCD):
+            print(x)
+        lLCD=[]
+        lDF=[]    
+
+    def showCOAS(self,table,attribut):
+        #Precondition, il faut que les Df soit deja toutes correctes donc que les mauvaises Df pour la table aient ete supprime 
+        lCSOA=[] #liste pour ajouter la fermeture 
+        l=self.depTab
+        other=self.depTab #pour la transitivité 
+        lCSOA.append(attribut) #c'est toujours vrai ça 
+        for i in l:
+            if i.lhs==attribute:
+                lCSOA.append(str(i.rhs))  
+            if i.table_name==table : #and i.rhs not in lCSOA:#and i.lhs==nameAttribute and i.rhs not in lCSOA: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
+                for j in other[1:]: #C'est pour traiter la transitivité
+                    if j.table_name==table and (i.rhs==j.lhs or i.lhs==j.rhs):
+                        if i.rhs==j.lhs and j.rhs not in lCSOA:
+                            lCSOA.append(str(j.rhs))
+                            lCSOA.append(str(i.rhs)) 
+                        if i.lhs==j.rhs and j.lhs not in lCSOA:
+                            lCSOA.append(str(j.lhs))  
+                                           
+        print("The closure of "+attribut+" is : \n")                    
+        for nom in set(lCSOA):
+            print(nom) 
+
+    def deleteUID(self,table):
+        l=self.depTab
+        other=self.depTab
+        lUID=[] #pour avoir ceux qui ne sont pas correcte 
+        lNameDep=[] #pour avoir juste le nom des dep 
+        for h in l:
+            if (isinstance(h.lhs,list)):
+                h.lhs=", ".join(h.lhs)
+            lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
+        for i in l:  
+            a_irhs=i.rhs  
+            for j in other: 
+                if j.table_name==table and i.table_name==table and (i.rhs==j.lhs or i.lhs==j.rhs):
+                    lUID.append(str(i.lhs)+" --> "+str(i.rhs))
+                    if (i.rhs==j.lhs):
+                        x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                        i.rhs=j.rhs
+                    if (i.lhs==j.rhs):
+                        x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
+                        i.rhs=a_irhs
+                    if x not in lUID: 
+                        lUID.append(x)   
+        for z in lUID:
+            print(z)    
+        print("If you want to delete them, please press 1 but if you don't want press 2")
+        y=input()
+        doublons=[]
+        if y=="1":
+            for v in l:
+                if (isinstance(v.lhs,list)):
+                    v.lhs=", ".join(v.lhs)
+                if v.table_name==table and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
+                    #l.remove(v)
+                    doublons.append(v)
+            ll=len(doublons)
+            g=0
+            while(g<ll):
+                l.remove(doublons[g])
+                g=g+1                               
+
     def close(self):
         pass
 
@@ -409,4 +532,29 @@ def compareList(list1, list2):  # returns True is the list are the same
         if(i not in a):
             return False
     return True
+
+def argAttribute(a):
+        x=len(a)
+        res=""+str(a[0])
+        if(x>1):
+            for i in range(1,x):
+                res=res+', '+str(a[i])
+        return res       
+
+def supelem(lp,eli):
+    i=0
+    while(i<len(lp)):
+        if (lp[i] in eli):
+            lp.pop(i)
+            i=i-1
+        i=i+1
+    return lp
+#pour supprimer les elements de eli dans lp    
+
+def noDoublons(a,b):
+    for x in a:
+        if x in b:
+            a.remove(x)
+    return a
+
 

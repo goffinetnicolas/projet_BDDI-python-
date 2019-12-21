@@ -123,46 +123,17 @@ class Shell(cmd.Cmd):
 
         """ Compute and show the not satisfied functional dependencies
         The user type 'showNSD table_name' """
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            print("")  # space
 
-        #Ok ça detecte quand il n'y a pas de NSD, il faut juste tester si ça les détecte mtn 
+        if(arg==""):
+            print("Error, you must enter a table name")
+            print("")  # space
 
-        l = self.db_object.depTab
-        arg_tab=sep(arg)
-        tabNSD=[]
-        tabNSD.append(str(arg_tab[0]))
-        tabDf={} # c'est un dico ou les clefs sont les attributs de gauche et les valeurs sont les attributs de droite
-        #On considere qu'on ne selectionne que un attribut à gauche !!!
-        r=0 #pour ne toucher que les df qui concerne la table
-        for i in l:
-            if i.table_name==arg_tab[0]:
-                #print(self.db_object.depTab[r].lhs)
-                attribute1=argAttribute(self.db_object.depTab[r].lhs) #le nom de l'attribut à gauche de la fléche
-                attribute2=str(self.db_object.depTab[r].rhs) #le nom de l'attribut à droite de la flèche
-                #print(attribute1)
-                self.db_object.command.execute("""SELECT """+attribute2 +""" FROM  """ +arg_tab[0]) #on considere qu'il n'y a que un attribut pour le moment
-                tabD=self.db_object.command.fetchall() #affiche les resultas sous forme de tableaux
-                self.db_object.command.execute("""SELECT """+attribute1 +""" FROM  """ +arg_tab[0])
-                tabG=self.db_object.command.fetchall()
-                # Cette boucle va nous permettre de comparer les valeurs pour voir si les df sont respecte
-                z=0
-                while (z<len(tabG)):
-                    k=tabG[z]
-                    if (k not in tabDf): #Si il n'est pas dans le dico on l'ajoute
-                        tabDf[k]=tabD[z]
-                    if (k in tabDf and tabDf[k]!=tabD[z]): #pb on rentre pas dans cette boucle
-                        tabNSD.append(i)
-                        z=len(tabG) #pour sortir de la boucle et passer à la Df suivante
-                    z=z+1
-            r=r+1
-
-        if (len(tabNSD)>1):    
-            print("It's the not satisfied functional dependencies")
-            length=len(tabNSD)
-            for m in range(1,length):
-                print(tabNSD[m])
-                #print(self.tabNSD[m])
         else:
-            print("There is no functional dependencies")
+            self.db_object.showNSD(arg)
+       
 
     def do_showNSD2(self, arg): # Nicolas's version
         if (self.db_object == None):
@@ -182,46 +153,16 @@ class Shell(cmd.Cmd):
         """ Compute and show the functional dependencies that are a logical consequence
         The user type 'showLCD table_name' """
 
-        #Il faut que showNSD ait ete effectue avant de faire ça 
-        ''' arg_tab=sep(arg) #c'est le nom de la table dans la base de données
-        if (arg_tab[0]==self.tabNSD[0]):
-        if(self.dejafaitNSD==1):
-            l=self.db_object.depTab
-            supelem(l,self.tabNSD) 
-            print("The logical consequence dependencies are : \n")
-            for m in l:
-                print(m)
-            else:
-                print("You must do 'showNSD' before")
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            print("")  # space
+
+        if(arg==""):
+            print("Error, you must enter a table name")
+            print("")  # space
+
         else:
-             print("Please use the same table that you have used 'showNSD'")     '''
-        l=self.db_object.depTab
-        other=self.db_object.depTab
-        arg_tab=sep(arg)
-        nameT=str(arg_tab[0])
-        lLCD=[]
-        lDF=[]
-        for i in l:
-            lDF.append(str(i.lhs)+" --> "+str(i.rhs)) #liste pour supprimer les doublons
-            a_irhs=i.rhs #pour sauvegarder la prmiere valeur 
-            for j in other:
-                if i.lhs==j.rhs and i.table_name==nameT and j.table_name==nameT:
-                    i.rhs=a_irhs
-                    lLCD.append(str(j.lhs)+" --> "+str(i.rhs))
-                if i.table_name==nameT and j.table_name==nameT and i.rhs==j.lhs:
-                    lLCD.append(str(i.lhs)+" --> "+str(j.rhs))
-                    i.rhs=j.rhs
-                    #voir cas sur papier avec des chiffres 
-                    #i.rhs=j.rhs
-                            # si on inerse pas et qu'on recoit 1->2 2->3
-        noDoublons(lLCD,lDF) #permet de supprimer les doublons 
-        print("The logical dependencies are : \n") #Il faut qu'elles ne soient pas déja dans les df de base 
-        for x in set(lLCD):
-            print(x)
-        lLCD=[]
-        lDF=[]   
-        print(lLCD)
-        print(lDF) 
+            self.db_object.showLCD(arg)
 
 
 
@@ -230,100 +171,38 @@ class Shell(cmd.Cmd):
         """ Compute and show the closure of the attribute of the table indicated  
         The user type 'showCOAS table_name attribute_name' """
 
-        #Precondition, il faut que les Df soit deja toutes correctes donc que les mauvaises Df pour la table aient ete supprime 
-        lCSOA=[] #liste pour ajouter la fermeture 
-        l=self.db_object.depTab
-        other=self.db_object.depTab #pour la transitivité 
-        arg_tab=sep(arg)
-        nameT=str(arg_tab[0]) #c'est le nom de la table dans la quelle on travaille 
-        nameAttribute=str(arg_tab[1])
-        lCSOA.append(nameAttribute) #c'est toujours vrai ça 
-        for i in l:
-            if i.lhs==nameAttribute:
-                lCSOA.append(str(i.rhs))  
-            #print(i.table_name==nameT)
-            #print(i.lhs==nameAttribute )
-            #print(i.rhs not in lCSOA)
-            if i.table_name==nameT : #and i.rhs not in lCSOA:#and i.lhs==nameAttribute and i.rhs not in lCSOA: #pour traiter que les DF qui sont propre à la table et donc lhs est l'attribut donc on veut la fermeture  
-                #lCSOA.append(str(i.rhs))
-                #print(i)
-                for j in other[1:]: #C'est pour traiter la transitivité
-                    #print("j.rhs :"+j.rhs) 
-                    #print("i.lhs :"+i.lhs)
-                    #print(j)
-                    if j.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
-                        if i.rhs==j.lhs and j.rhs not in lCSOA:
-                            lCSOA.append(str(j.rhs))
-                            lCSOA.append(str(i.rhs))
-                            #i.rhs=j.rhs 
-                        #print(i.lhs+"-->"+i.rhs)
-                        #print(j.lhs+"-->"+j.rhs)   
-                        if i.lhs==j.rhs and j.lhs not in lCSOA:
-                            lCSOA.append(str(j.lhs))  
-                            #print("i.rhs :"+i.rhs)
-                        '''if i.lhs==j.rhs:
-                            lCSOA.append(str(i.v))'''    
-                       # i.rhs=j.rhs #pour traiter les cas 1->2 2->3 3->4 et du coup que 4 soit dans la liste
-                        '''if (i.rhs==j.lhs): #voir cas sur papier avec des chiffres 
-                            i.rhs=j.rhs'''
-                            # si on inerse pas et qu'on recoit 1->2 2->3
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            print("")  # space
+
+        if(arg==""):
+            print("Error, you must enter a table name and an attribute")
+            print("")  # space
+        arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
+        if (len(arg_tab)<2):
+            print("Error you must enter a table name and an attribute")
+            print("")    
+        else:
+            self.db_object.showLCD(arg_tab[0],arg_tab[1])
         
-                   
-        print("The closure of "+nameAttribute+" is : \n")                    
-        for nom in set(lCSOA):
-            print(nom)                
-        lCSOA=[]
-
-
-
         
 #a faire pui simplifier le code 
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 
         """ Compute and show functional dependencies that are unnecessary or inconsistent,
-        the user can delete them if he wishes """
+        the user can delete them if he wishes 
+        The user type 'deleteUID table_name' """
 
-        l=self.db_object.depTab
-        other=self.db_object.depTab
-        arg_tab=sep(arg)
-        nameT=str(arg_tab[0])
-        lUID=[] #pour avoir ceux qui ne sont pas correcte 
-        lNameDep=[] #pour avoir juste le nom des dep 
-        for h in l:
-            lenn=int(len(str(h)))-int((len(h.rhs))+int(len(h.lhs))+6)
-            if (isinstance(h.lhs,list)):
-                h.lhs=", ".join(h.lhs)
-            lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
-        for i in l:  
-            a_irhs=i.rhs  
-            for j in other: 
-                if j.table_name==nameT and i.table_name==nameT and (i.rhs==j.lhs or i.lhs==j.rhs):
-                    lUID.append(str(i.lhs)+" --> "+str(i.rhs))
-                    if (i.rhs==j.lhs):
-                        x=str(i.lhs)+" --> "+str(j.rhs) #C'est pour le tester si il est dans l'ensemble des df 
-                        i.rhs=j.rhs
-                    if (i.lhs==j.rhs):
-                        x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
-                        i.rhs=a_irhs
-                    if x not in lUID: 
-                        lUID.append(x)   
-        for z in lUID:
-            print(z)    
-        print("If you want to delete them, please press 1 but if you don't want press 2")
-        y=input()
-        doublons=[]
-        if y=="1":
-            for v in l:
-                if (isinstance(v.lhs,list)):
-                    v.lhs=", ".join(v.lhs)
-                if v.table_name==nameT and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
-                    #l.remove(v)
-                    doublons.append(v)
-            ll=len(doublons)
-            g=0
-            while(g<ll):
-                l.remove(doublons[g])
-                g=g+1        
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            print("")  # space
+
+        if(arg==""):
+            print("Error, you must enter a table name and an attribute")
+            print("")  # space
+
+        else:
+            self.db_object.deleteUID(arg)
 
 
     def do_checkBCNF(self, arg):
@@ -444,35 +323,6 @@ def verify_recurrent_lhs(tab):
         a=a+1
     return False
 
-def argAttribute(a):
-        x=len(a)
-        res=""+str(a[0])
-        if(x>1):
-            for i in range(1,x):
-                res=res+', '+str(a[i])
-        return res       
-
-'''def remplire(d,t,v) # le t c'est les clef et v les valeurs 
-    for i in range(len(t)):
-        x=t[i]
-        d[x]=v[i]
-    return d   '''    
-
-def supelem(lp,eli):
-    i=0
-    while(i<len(lp)):
-        if (lp[i] in eli):
-            lp.pop(i)
-            i=i-1
-        i=i+1
-    return lp
-#pour supprimer les elements de eli dans lp    
-
-def noDoublons(a,b):
-    for x in a:
-        if x in b:
-            a.remove(x)
-    return a
 
 
 if __name__ == '__main__':

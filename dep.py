@@ -1,5 +1,6 @@
 class Dep:
     def __init__(self, dbname, table_name, lhs, rhs):
+
         """ Represent a functional dependency """
 
         self.table_name = table_name
@@ -21,6 +22,7 @@ class Dep:
             sl = self.lhs
             ol = other.lhs
             return stn == otn and compare_list(sl, ol) and srhs == orhs
+
         if(isinstance(self.lhs, str) and isinstance(other.lhs, list)): # single lhs comparing to list of lhs
             return False
 
@@ -33,7 +35,7 @@ class Dep:
             return stn == otn and sl == ol and srhs == orhs
 
     def __str__(self):
-        return("data_base: "+ self.dbname+" table: "+self.table_name +" Dep: "+ self.lhs_rep+ " --> "+ self.rhs +"\n")
+        return("data_base: "+ self.dbname+" table: "+self.table_name +" Dep: "+ self.lhs_rep+ " --> "+ self.rhs)
 
 def compare_list(a,b):
     c1=[]

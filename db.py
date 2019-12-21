@@ -46,7 +46,6 @@ class DataBase:
                 for i in self.depTab:
                     if(dep_object.__eq__(i)):
                         print("Error, the functional dependency already exists")
-                        print("")  # space
                         return 0  # we don't want to execute the rest of the function
 
 
@@ -65,7 +64,6 @@ class DataBase:
 
             except:
                 print("Error, the attribute(s) or the table indicated do not exist")
-                print("")  # space
 
 
         else:
@@ -84,13 +82,10 @@ class DataBase:
                 self.depTab.append(dep_object)
                 print("New functional dependency added:")
                 print(dep_object.__str__())
-                print("")  # space
 
             except Exception as e:
                 print(e)
                 print("Error, the attribute(s) or the table indicated do not exist")
-                print("")  # space
-
     
 
 
@@ -109,7 +104,6 @@ class DataBase:
 
             if (not_member_of(dep_object, current_dep_tab)):
                 print("Error, The arguments indicated are not in the functional dependencies")
-                print("")  # space
 
             else:
                 for i in current_dep_tab:
@@ -123,12 +117,10 @@ class DataBase:
 
                 print("[" + table_name_arg + ": {" + lhs_string + "} --> " + rhs_arg
                     + "] has been successfully removed from the functional dependencies")
-                print("")  # space
 
         else:
             if (not_member_of(dep_object, current_dep_tab)):
                 print("Error, The arguments indicated are not in the functional dependencies")
-                print("")  # space
 
             else:
                 for i in current_dep_tab:
@@ -138,7 +130,7 @@ class DataBase:
                 self.command.execute("DELETE FROM FuncDep WHERE table_name = :table_name AND lhs = :lhs AND rhs = :rhs",
                                      {'table_name': table_name_arg, 'lhs': lhs_arg, 'rhs': rhs_arg})
                 self.connection.commit()
-                print("")  # space
+
                 print("[" + table_name_arg + ": " + lhs_arg + " --> " + rhs_arg
                       + "] has been successfully removed from the functional dependencies")
 
@@ -194,7 +186,6 @@ class DataBase:
 
         if (not_satisfied == []):
             print("All the functional dependencies are satisfied")
-            print("")  # space
         else:
             for dep in not_satisfied:
                 print("The functional dependency: [" + dep.table_name + ": " + dep.lhs_rep + " ---> " + dep.rhs +
@@ -232,7 +223,6 @@ class DataBase:
 
         if (len(table_dep_list) == 0):
             print("There is not functional dependencies linked to the indicated table")
-            print("")  # space
             return False
 
         att_list = self.find_table_attribute(table)  # total attribute list of the table
@@ -290,9 +280,7 @@ class DataBase:
                 table_dep_list.append(dep)
 
         if (len(table_dep_list) == 0):
-            print("")  # space
             print("There is not functional dependencies linked to the indicated table")
-            print("")  # space
             return []
 
         key_list = []
@@ -501,7 +489,16 @@ class DataBase:
                     print(v)
                     self.removeDep(v)   
         print("Les doublons")            
-        print(doublons)                                      
+        print(doublons)
+
+    def create3NF_dec(self, table, db_name):
+
+        new_db = DataBase(db_name + ".db")
+        dep_table_list = []
+        for dep in self.depTab:
+            if (dep.table_name == table):
+                dep_table_list.append(dep)
+
 
     def close(self):
         pass

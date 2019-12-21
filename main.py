@@ -18,9 +18,11 @@ class Shell(cmd.Cmd):
 
         """ The user type 'exit' and leave the application """
 
+        print("")  # space
         print('Thank you for using this program, Goodbye')
         self.close()
         return True
+        print("")  # space
 
     def close(self):
         if self.db_object:
@@ -31,26 +33,26 @@ class Shell(cmd.Cmd):
 
         """ The user type 'connect data_base.db' to create a DataBase object connected with the file indicated """
 
+        print("")  # space
         if (arg == ""):
             print("please, enter a data base file")
-            print("")  # space
             return False
         print("connected to " + arg)
-        print("")  # space
         newDB = DataBase(arg)
         self.db_object = newDB
+        print("")  # space
 
     def do_disconnect(self, arg):
 
         """The user type 'disconnect' to remove the data base file connected"""
 
+        print("")  # space
         if (self.db_object == None):
             print("Error, no data base file connected")
-            print("")  # space
         else:
-            print("")  # space
             print("Disconnected to " + self.db_object.db_name)
             self.db_object = None
+        print("")  # space
 
     def do_addDep(self, arg):  # first argument is table name, second is lhs and third is rhs
 
@@ -59,6 +61,7 @@ class Shell(cmd.Cmd):
          It creates a new Dep object with the arguments indicated,
          the Dep object is added to the depTab list in the current DataBase object"""
 
+        print("")  # space
         if(arg==""):
             print("Error, you must type 'addDep table_name lhs rhs' "
                   "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs' ")
@@ -67,22 +70,20 @@ class Shell(cmd.Cmd):
 
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
             return 0
 
         if (len(arg_tab) < 3):
             print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
-            print("")  # space
             return 0
 
         if(isinstance(arg_tab[1], list)):
             if(verify_recurrent_lhs(arg_tab[1])):
                 print("Error, you have types 2 identical attributes in lhs")
-                print("")  # space
                 return 0
 
         new_dep_object = Dep(self.db_object.db_name, arg_tab[0], arg_tab[1], arg_tab[2])
         self.db_object.addDep(new_dep_object)
+        print("")  # space
 
     def do_removeDep(self, arg):  # first argument is table name, second is lhs and third is rhs
 
@@ -90,25 +91,24 @@ class Shell(cmd.Cmd):
          to remove the functional dependency indicated,
          the Dep object is removed from the depTab list in the current DataBase object"""
 
+        print("")  # space
         arg_tab=sep(arg)
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
         if (len(arg_tab) < 3):
             print("Error, you must type 'addDep table_name lhs rhs' or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
-            print("")  # space
         else:
             compare_dep = Dep(self.db_object, arg_tab[0], arg_tab[1], arg_tab[2])
             self.db_object.removeDep(compare_dep)
-
+        print("")  # space
 
     def do_showDep(self, arg):
 
         """Show the current functional dependency in the data base file"""
 
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("") # space
         else:
             l = self.db_object.depTab
             if (l == []):
@@ -117,35 +117,40 @@ class Shell(cmd.Cmd):
                       "or 'addDep table_name {lhs1, lhs2, lhs3, ...} rhs'")
             for i in l:
                 print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
-            print("")  # space
+        print("")  # space
 
     def do_showNSD(self, arg):  # Maxime's version
 
         """ Compute and show the not satisfied functional dependencies
         The user type 'showNSD table_name' """
+
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
 
         if(arg==""):
             print("Error, you must enter a table name")
-            print("")  # space
 
         else:
             self.db_object.showNSD(arg)
+        print("")  # space
        
 
     def do_showNSD2(self, arg): # Nicolas's version
+
+        """ Compute and show the not satisfied functional dependencies
+            The user type 'showNSD table_name' """
+
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
 
         if(arg==""):
             print("Error, you must enter a table name")
-            print("")  # space
 
         else:
             self.db_object.showNSD2(arg)
+        print("")  # space
 
     #recopier le code de mon gsm pour LCD 
     def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
@@ -153,17 +158,16 @@ class Shell(cmd.Cmd):
         """ Compute and show the functional dependencies that are a logical consequence
         The user type 'showLCD table_name' """
 
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
 
         if(arg==""):
             print("Error, you must enter a table name")
-            print("")  # space
 
         else:
             self.db_object.showLCD(arg)
-
+        print("")  # space
 
 
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
@@ -171,38 +175,37 @@ class Shell(cmd.Cmd):
         """ Compute and show the closure of the attribute of the table indicated  
         The user type 'showCOAS table_name attribute_name' """
 
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
 
         if(arg==""):
             print("Error, you must enter a table name and an attribute")
-            print("")  # space
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
         if (len(arg_tab)<2):
             print("Error you must enter a table name and an attribute")
-            print("")    
         else:
             self.db_object.showCOAS(arg_tab[0],arg_tab[1])
+        print("")  # space
         
         
-#a faire pui simplifier le code 
+    #a faire pui simplifier le code
     def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
 
         """ Compute and show functional dependencies that are unnecessary or inconsistent,
         the user can delete them if he wishes 
         The user type 'deleteUID table_name' """
 
+        print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
-            print("")  # space
 
         if(arg==""):
             print("Error, you must enter a table name and an attribute")
-            print("")  # space
 
         else:
             self.db_object.deleteUID(arg)
+        print("")  # space
 
 
     def do_checkBCNF(self, arg):
@@ -210,6 +213,7 @@ class Shell(cmd.Cmd):
         """ Check if the data base file in in BCNF,
         user has to type the command 'checkBCNF table_name' """
 
+        print("")  # space
         table=arg
         if(table==""):
             print("Error, you have to type a table as argument")
@@ -217,10 +221,11 @@ class Shell(cmd.Cmd):
         if(self.db_object.checkBCNF(table) == True):
             print(table," is in BCNF")
         else:
+
             print(table," is not in BCNF")
+        print("")  # space
 
     def do_check3NF(self, arg):
-
         """ Check if the data base file in in 3NF """
 
         table = arg
@@ -228,15 +233,25 @@ class Shell(cmd.Cmd):
             print("Error, you have to type a table as argument")
             return 0
         else:
-            if(self.db_object.check3NF(table) == True):
-                print(table+" is in 3NF")
+            if (self.db_object.check3NF(table) == True):
+                print(table + " is in 3NF")
             else:
-                print(table+" is not in 3NF")
+                if (len(self.db_object.showNSD2(table)) == 0):
+                    print(table + " is not in 3NF but satisfies the current functional dependencies")
+                    print("Do you want to create a new data base with 3NF decompositions ? (y/n)")
+                    user_res = input()
+                    if (user_res == "y"):
+                        print("Please, enter the data base file name that you want to create")
+                        user_db_name = input()
+                        self.db_object.create3NF_dec(table, user_db_name)
+                else:
+                    print(table + " is not in 3NF and does not satisfy the current functional dependencies")
 
     def do_showKey(self, arg):
 
         """ Compute and show the key(s) of the functional dependencies """
 
+        print("")  # space
         table=arg
         if(table==""):
             print("Error, you have to type a table as argument")
@@ -249,12 +264,13 @@ class Shell(cmd.Cmd):
                 print("key list:")
                 for key in key_list:
                     print(key)
-                print("")  # space
+        print("")  # space
 
     def do_showSuperKey(self, arg):
 
         """ Compute and show the super-key(s) of the functional dependencies """
 
+        print("")  # space
         table = arg
         if (table == ""):
             print("Error, you have to type a table as argument")
@@ -268,7 +284,32 @@ class Shell(cmd.Cmd):
                 print("super-key list:")
                 for key in super_key_list:
                     print(key)
-                print("")  # space
+        print("")  # space
+
+    def do_removeTableDep(self, arg):
+        print("")  # space
+        table = arg
+        if (table == ""):
+            print("Error, you have to type a table as argument")
+            return 0
+        else:
+            removed=[]
+            for dep in self.db_object.depTab:
+                if(dep.table_name == table):
+                    removed.append(dep)
+
+            for dep in removed:
+                self.db_object.removeDep(dep)
+        print("")  # space
+
+    def do_removeAllDep(self, arg):
+        print("")  # space
+        remove=[]
+        for dep in self.db_object.depTab:
+            remove.append(dep)
+        for dep in remove:
+            self.db_object.depTab.remove(dep)
+        print("")  # space
 
 def sep(arg):
     res = []

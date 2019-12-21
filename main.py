@@ -311,15 +311,20 @@ class Shell(cmd.Cmd):
             print(z)    
         print("If you want to delete them, please press 1 but if you don't want press 2")
         y=input()
+        doublons=[]
         if y=="1":
             for v in l:
                 if (isinstance(v.lhs,list)):
                     v.lhs=", ".join(v.lhs)
                 if v.table_name==nameT and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
-                    l.remove(v)
+                    #l.remove(v)
+                    doublons.append(v)
+            ll=len(doublons)
+            g=0
+            while(g<ll):
+                l.remove(doublons[g])
+                g=g+1        
 
-
-        # Demander si on veut supprimer et utiliser noDoublons pour le faire     
 
     def do_checkBCNF(self, arg):
 

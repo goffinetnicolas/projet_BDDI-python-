@@ -471,13 +471,8 @@ class DataBase:
                 if (isinstance(v.lhs,list)):
                     v.lhs=", ".join(v.lhs)
                 if v.table_name==table and (str(v.lhs)+" --> "+str(v.rhs)) in lUID:
-                    #l.remove(v)
                     doublons.append(v)
-            ll=len(doublons)
-            g=0
-            while(g<ll):
-                l.remove(doublons[g])
-                g=g+1                               
+                    self.removeDep(v)                             
 
     def close(self):
         pass

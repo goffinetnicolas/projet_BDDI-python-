@@ -368,6 +368,7 @@ class DataBase:
             if i.table_name==table:
                 attribute1=argAttribute(l[r].lhs) #le nom de l'attribut à gauche de la fléche
                 attribute2=str(l[r].rhs) #le nom de l'attribut à droite de la flèche
+                print(attribute1)
                 self.command.execute("""SELECT """+attribute2 +""" FROM  """ + table) #on considere qu'il n'y a que un attribut pour le moment
                 tabD=self.command.fetchall() #affiche les resultas sous forme de tableaux
                 self.command.execute("""SELECT """+attribute1 +""" FROM  """ + table)
@@ -451,11 +452,12 @@ class DataBase:
         l=self.depTab
         other=self.depTab
         lUID=[] #pour avoir ceux qui ne sont pas correcte 
-        lNameDep=[] #pour avoir juste le nom des dep 
-        for h in l:
+        #lNameDep=[] #pour avoir juste le nom des dep 
+        """for h in l:
             if (isinstance(h.lhs,list)):
                 h.lhs=", ".join(h.lhs)
             lNameDep.append(str(h.lhs)+" --> "+str(h.rhs))
+        print(lNameDep)"""
         for i in l:  
             a_irhs=i.rhs  
             for j in other: 
@@ -466,9 +468,10 @@ class DataBase:
                         i.rhs=j.rhs
                     if (i.lhs==j.rhs):
                         x=str(j.lhs)+" --> "+str(i.rhs) #C'est pour le tester si il est dans l'ensemble des df 
-                        i.rhs=a_irhs
+                        #i.rhs=a_irhs
                     if x not in lUID: 
                         lUID.append(x)   
+        print(lUID)                
         for z in lUID:
             print(z)    
         print("If you want to delete them, please press 1 but if you don't want press 2")
@@ -536,13 +539,18 @@ def compareList(list1, list2):  # returns True is the list are the same
             return False
     return True
 
+
+
 def argAttribute(a):
         x=len(a)
-        res=""+str(a[0])
-        if(x>1):
+        res=""
+        if(not isinstance(a,list)):
+            res=""+str(a) 
+        else:  
+            res=""+str(a[0]) 
             for i in range(1,x):
-                res=res+', '+str(a[i])
-        return res       
+                res=res+', '+str(a[i])     
+        return res             
 
 def supelem(lp,eli):
     i=0

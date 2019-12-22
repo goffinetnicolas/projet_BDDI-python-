@@ -118,25 +118,9 @@ class Shell(cmd.Cmd):
             for i in l:
                 print(i.table_name + ": " + i.lhs_rep + " --> " + i.rhs)
         print("")  # space
-
-    def do_showNSD(self, arg):  # Maxime's version
-
-        """ Compute and show the not satisfied functional dependencies
-        The user type 'showNSD table_name' """
-
-        print("")  # space
-        if (self.db_object == None):
-            print("Error, you must connect a data base file")
-
-        if(arg==""):
-            print("Error, you must enter a table name")
-
-        else:
-            self.db_object.showNSD(arg)
-        print("")  # space
        
 
-    def do_showNSD2(self, arg): # Nicolas's version
+    def do_showNSD(self, arg): # Nicolas's version
 
         """ Compute and show the not satisfied functional dependencies
             The user type 'showNSD table_name' """
@@ -158,24 +142,8 @@ class Shell(cmd.Cmd):
                           "] is not satisfied")
         print("")  # space
 
-    #recopier le code de mon gsm pour LCD 
-    def do_showLCD(self, arg):  # LCD = Logical Consequence Dependencies
 
-        """ Compute and show the functional dependencies that are a logical consequence
-        The user type 'showLCD table_name' """
-
-        print("")  # space
-        if (self.db_object == None):
-            print("Error, you must connect a data base file")
-
-        if(arg==""):
-            print("Error, you must enter a table name")
-
-        else:
-            self.db_object.showLCD(arg)
-        print("")  # space
-
-    def do_showLCD2(self, arg):
+    def do_showLCD(self, arg):
 
         """ Compute and show the functional dependencies that are a logical consequence
                 The user type 'showLCD table_name' """
@@ -195,7 +163,7 @@ class Shell(cmd.Cmd):
                 print(dep.__str__())
         print("")  # space
 
-    def do_showCOAS2(self, arg):
+    def do_showCOAS(self, arg):
 
         """ Compute and show the closure of the attribute of the table indicated
                 The user type 'showCOAS table_name attribute_name' """
@@ -220,46 +188,8 @@ class Shell(cmd.Cmd):
                 for att in COAS:
                     print(att)
 
-    def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
-        """ Compute and show the closure of the attribute of the table indicated  
-        The user type 'showCOAS table_name attribute_name' """
-
-        print("")  # space
-        if (self.db_object == None):
-            print("Error, you must connect a data base file")
-            return 0
-
-        print(arg)
-        if(arg==""):
-            print("Error, you must enter a table name and an attribute")
-        arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]
-        if (len(arg_tab)<2):
-            print("Error you must enter a table name and an attribute")
-        else:
-            self.db_object.showCOAS(arg_tab[0],arg_tab[1])
-        print("")  # space
-        
-        
-    #a faire pui simplifier le code
-    def do_deleteUID(self, arg):  # UID = Unnecessary or Inconsistent Dependencies
-
-        """ Compute and show functional dependencies that are unnecessary or inconsistent,
-        the user can delete them if he wishes 
-        The user type 'deleteUID table_name' """
-
-        print("")  # space
-        if (self.db_object == None):
-            print("Error, you must connect a data base file")
-
-        if(arg==""):
-            print("Error, you must enter a table name and an attribute")
-
-        else:
-            self.db_object.deleteUID(arg)
-        print("")  # space
-
-    def do_deleteUID2(self, arg):
+    def do_deleteUID(self, arg):
 
         """ Compute and show functional dependencies that are unnecessary or inconsistent,
             the user can delete them if he wishes

@@ -169,6 +169,26 @@ class Shell(cmd.Cmd):
             self.db_object.showLCD(arg)
         print("")  # space
 
+    def do_showCOAS2(self, arg):
+        print("")  # space
+
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+            return 0
+
+        arg_tab=sep(arg)
+        if(len(arg_tab) < 2):
+            #print("Error, you must enter a table name and an attribute name")
+            return 0
+
+        else:
+            COAS=self.db_object.showCOAS2(arg_tab[0], arg_tab[1])
+            if(len(COAS) == 0):
+                print("No functional dependencies found")
+            else:
+                print("Closure of the attribute set: ")
+                for att in COAS:
+                    print(att)
 
     def do_showCOAS(self,arg): # CSOA = Closure Of an Attribute Set
 
@@ -178,7 +198,9 @@ class Shell(cmd.Cmd):
         print("")  # space
         if (self.db_object == None):
             print("Error, you must connect a data base file")
+            return 0
 
+        print(arg)
         if(arg==""):
             print("Error, you must enter a table name and an attribute")
         arg_tab=sep(arg)  # transform the argument string with this pattern list : [table_name [lhs, lhs2,...] rhs]

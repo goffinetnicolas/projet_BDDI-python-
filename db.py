@@ -454,7 +454,49 @@ class DataBase:
                                            
         print("The closure of "+x+" is : \n")                    
         for nom in set(lCSOA):
-            print(nom) 
+            print(nom)
+
+    def showCOAS2(self, table, att):
+        table_dep_list = self.extract_dep(table)  # extract the functional dependencies linked to the table
+        att_obtained = []  # attributes that we will obtain thanks to functional dependencies
+
+        if (len(table_dep_list) == 1):
+            lhs = table_dep_list[0].lhs
+            rhs = table_dep_list[0].rhs
+
+            if (isinstance(lhs, list)):
+                for lhs_string in lhs:
+                    att_obtained.append(lhs_string)
+
+            else:
+                att_obtained.append(lhs)
+
+            att_obtained.append(rhs)
+            return att_obtained
+
+        else:
+            att_list = self.find_table_attribute(table)  # total attribute list of the table
+            for dep1 in table_dep_list:
+                att_obtained.append(dep1.rhs)
+
+                if (isinstance(dep1.lhs, list)):
+                    for lhs in dep1.lhs:
+                        att_obtained.append(lhs)
+                else:
+                    att_obtained.append(dep1.lhs)
+
+                while (not compareList(att_list,att_obtained)):  # compareList returns True if the lists are the same
+                    check_list = copy.deepcopy(att_obtained)
+
+                    for dep2 in table_dep_list:
+                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):  # must verify
+                            att_obtained.append(dep2.rhs)
+
+                    if (compareList(check_list, att_obtained)):  # compareList returns True if the lists are the same
+                        return att_obtained
+
+        return att_obtained
+
 
     def deleteUID(self,table):
         l=self.depTab
@@ -490,6 +532,17 @@ class DataBase:
                     self.removeDep(v)   
         print("Les doublons")            
         print(doublons)
+
+    def extract_dep(self, table):
+        l = self.depTab
+        table_dep_list = []
+        att_list = self.find_table_attribute(table)  # total attribute list of the table
+
+        for dep in l:  # extract the functional dependencies linked to the table
+            if (dep.table_name == table):
+                table_dep_list.append(dep)
+
+        return table_dep_list
 
     def create3NF_dec(self, table, db_name):
 

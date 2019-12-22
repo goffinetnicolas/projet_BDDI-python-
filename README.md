@@ -2,7 +2,7 @@
 
 Bienvenue dans le fichier README
 
-Voici les explications concernant ce programme. Ce programme est codé en Python par Nicolas GOFFINET et Maxime Renversez. Il gère les dépendances fonctionnelles des bases de données introduites dans le répertoire "putDataBaseHere".
+Voici les explications concernant ce programme. Celui-ci est codé en Python par Nicolas GOFFINET et Maxime Renversez. Il gère les dépendances fonctionnelles des bases de données introduites dans le répertoire "putDataBaseHere".
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -10,11 +10,11 @@ Lien du github: https://github.com/goffinetnicolas/projet_BDDI-python-
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteur de ligne de commande (les commandes doivent être executées sans les crochets):
+Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteur de ligne de commande (les commandes doivent être exécutées sans les crochets):
 
  1. [help] ou [?] 
 
--Affiche les commandes executables sur la console. "help" permet aussi de donner la documentation d'une commande si vous introduisez la commande ainsi: [help commande_name].
+-Affiche les commandes exécutables sur la console. "help" permet aussi de donner la documentation d'une commande si vous introduisez la commande ainsi: [help command_name].
 
 
  2. [exit]
@@ -39,12 +39,12 @@ Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteu
 
  6. [addDep table_name lhs rhs]
 
--Permet d'ajouter une dépendance fonctionnelle avec un 'lhs' singulier dans la table indiquée. Il est à noter que la formulation est importante, chaque argument doit être séparer d'un espace comme montré ci-dessus afin d'éviter d'afficher une erreur.
+-Permet d'ajouter une dépendance fonctionnelle avec un 'lhs' singulier dans la table indiquée. Il est à noter que la formulation est importante, chaque argument doit être séparé d'un espace comme montré ci-dessus afin d'éviter d'afficher une erreur.
 
 
  7. [addDep table_name {lhs1, lhs2, lhs3, ...} rhs]
 
--Permet d'ajouter une dépendance fonctionnelle avec plusieurs 'lhs' dans la table indiqué. L'utilisateur doit indiquer les 'lhs' entre accolade et séparé par des virgules comme montré ci-dessus.
+-Permet d'ajouter une dépendance fonctionnelle avec plusieurs 'lhs' dans la table indiqué. L'utilisateur doit indiquer les 'lhs' entre accolade et séparés par des virgules comme montré ci-dessus.
 
 
  8. [removeDep table_name lhs rhs] et [removeDep table_name {lhs1, lhs2, lhs3, ...} rhs]
@@ -74,7 +74,7 @@ Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteu
 
  13. [showCOAS table_name attribute] ou [showCOAS table_name attribute1 attribute2 ...]
 
--Permet de calculer et montrer la fermeture d'un ou plusieurs attributs.
+-Permet de calculer et montrer la fermeture d'un ou de plusieurs attributs.
 
 
  14. [deleteUID table_name]
@@ -87,7 +87,7 @@ Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteu
 -Permet de calculer toutes les clés possibles de la table indiquée.
 
 
- 16. [showSuperKey]
+ 16. [showSuperKey table_name]
 
 -Permet de calculer toutes les super-clés présentes dans les clés.
 
@@ -99,9 +99,9 @@ Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteu
 
  18. [showBCNF table_name]
 
--Permet de montrer les dépendances fonctionnelles qui empêche la table d'être en BCNF. 
+-Permet de montrer les dépendances fonctionnelles qui empêchent la table d'être en BCNF. 
 
 
  19. [show3NF table_name]
 
--Permet de savoir si la table est en 3NF, si ce n'est pas le cas et si toutes les dépendances fonctionnelles sont respectées par la table, l'utilisateur peut décider de recréer une nouvelle base de donnée avec des décompositions en 3NF. il est à noter que la décomposition en 3NF n'a pas été beaucoup testée et peut mener à des erreurs.
+-Permet de savoir si la table est en 3NF, si ce n'est pas le cas et si toutes les dépendances fonctionnelles sont respectées par la table, l'utilisateur peut décider de recréer une nouvelle base de donnée avec des décompositions en 3NF. Il est à noter que la décomposition en 3NF n'a pas été beaucoup testée et peut mener à des erreurs.

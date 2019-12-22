@@ -169,6 +169,26 @@ class Shell(cmd.Cmd):
             self.db_object.showLCD(arg)
         print("")  # space
 
+    def do_showLCD2(self, arg):
+
+        """ Compute and show the functional dependencies that are a logical consequence
+                The user type 'showLCD table_name' """
+
+        print("")  # space
+        table=arg
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+
+        if (table == ""):
+            print("Error, you must enter a table name")
+
+        else:
+            logical_list=self.db_object.showLCD2(table)
+            print("Logical functional dependency list: ")
+            for dep in logical_list:
+                print(dep.__str__())
+        print("")  # space
+
     def do_showCOAS2(self, arg):
         print("")  # space
 
@@ -176,13 +196,13 @@ class Shell(cmd.Cmd):
             print("Error, you must connect a data base file")
             return 0
 
-        arg_tab=sep(arg)
+        arg_tab=sep(arg) # pos1=table, pos2=lhs1, pos3=lhs4, ...
         if(len(arg_tab) < 2):
             #print("Error, you must enter a table name and an attribute name")
             return 0
 
         else:
-            COAS=self.db_object.showCOAS2(arg_tab[0], arg_tab[1])
+            COAS=self.db_object.showCOAS2(arg_tab)
             if(len(COAS) == 0):
                 print("No functional dependencies found")
             else:
@@ -229,6 +249,23 @@ class Shell(cmd.Cmd):
             self.db_object.deleteUID(arg)
         print("")  # space
 
+    def do_deleteUID2(self, arg):
+
+        """ Compute and show functional dependencies that are unnecessary or inconsistent,
+            the user can delete them if he wishes
+            The user type 'deleteUID table_name' """
+
+        print("")  # space
+        if (self.db_object == None):
+            print("Error, you must connect a data base file")
+
+        table = arg
+        if (table == ""):
+            print("Error, you must enter a table name and an attribute")
+
+        else:
+            self.db_object.deleteUID2(table)
+        print("")  # space
 
     def do_checkBCNF(self, arg):
 
@@ -246,6 +283,21 @@ class Shell(cmd.Cmd):
 
             print(table," is not in BCNF")
         print("")  # space
+
+    def do_showWrongDepBCNF(self, arg):
+        table=arg
+        if (table == ""):
+            print("Error, you have to type a table as argument")
+            return 0
+        else:
+            wrong_dep=self.db_object.checkWrongDepBCNF(table)
+            if(len(wrong_dep) == 0):
+                print(table+" is in BCNF")
+            else:
+                print("list of the functional dependencies affected:" )
+                for dep in wrong_dep:
+                    print(dep.__str__())
+
 
     def do_check3NF(self, arg):
         """ Check if the data base file in in 3NF """

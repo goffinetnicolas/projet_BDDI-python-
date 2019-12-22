@@ -230,10 +230,10 @@ class Shell(cmd.Cmd):
             print("Error, you have to type a table as argument")
             return 0
         if(self.db_object.checkBCNF(table) == True):
-            print(table," is in BCNF")
+            print(table+" is in BCNF")
         else:
 
-            print(table," is not in BCNF")
+            print(table+" is not in BCNF")
         print("")  # space
 
     def do_showBCNF(self, arg):

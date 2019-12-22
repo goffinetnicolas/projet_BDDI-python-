@@ -136,14 +136,9 @@ class DataBase:
                 print("[" + table_name_arg + ": " + lhs_arg + " --> " + rhs_arg
                       + "] has been successfully removed from the functional dependencies")
 
-    def showNSD2(self, table):  # Nicolas version
+    def showNSD2(self, table):
         not_satisfied = []
-        dep_list = self.depTab
-        table_dep_list = []  # total list of dependencies of the indicated table
-
-        for dep in dep_list:
-            if (dep.table_name == table):
-                table_dep_list.append(dep)
+        table_dep_list = self.extract_dep(table)  # total list of dependencies of the indicated table
 
         for dep in table_dep_list:
             lhs = dep.lhs
@@ -211,12 +206,7 @@ class DataBase:
          this algorithm check if all the functional dependencies can gives t
          he entire attribute list of the indicated table """
 
-        l = self.depTab
-        table_dep_list = []  # the dep list of the indicated table
-
-        for dep in l:  # extract the functional dependencies linked to the table
-            if (dep.table_name == table):
-                table_dep_list.append(dep)
+        table_dep_list = self.extract_dep(table)  # the dep list of the indicated table
 
         if (len(table_dep_list) == 0):
             print("There is not functional dependencies linked to the indicated table")
@@ -259,7 +249,8 @@ class DataBase:
                     check_list = copy.deepcopy(att_obtained)
 
                     for dep2 in table_dep_list:
-                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):  # must verify
+                        if (detect(dep2.lhs, att_obtained) and dep2.rhs not in att_obtained):
+                            # detect() returns true if the first argument is in the second
                             att_obtained.append(dep2.rhs)
 
                     if (compareList(check_list, att_obtained)):  # compareList returns True if the lists are the same
@@ -287,13 +278,8 @@ class DataBase:
         return wrong_dep
 
     def showKey(self, table):
-        l = self.depTab
-        table_dep_list = []
+        table_dep_list = self.extract_dep(table)
         att_list = self.find_table_attribute(table)  # total attribute list of the table
-
-        for dep in l:  # extract the functional dependencies linked to the table
-            if (dep.table_name == table):
-                table_dep_list.append(dep)
 
         if (len(table_dep_list) == 0):
             print("There is not functional dependencies linked to the indicated table")
@@ -317,11 +303,21 @@ class DataBase:
         while(not compareList(potential_key,total_attribute_list)):
             compare_key = copy.deepcopy(potential_key)
             for dep in dep_list:
-                if(detect(dep.lhs,potential_key) and dep.rhs not in potential_key):  # verify this condition
+                if(detect(dep.lhs,potential_key) and dep.rhs not in potential_key):
                     potential_key.append(dep.rhs)
             if(compare_key == potential_key):
                 return False
         return True
+
+    def check_all_attributes_obtained(self, dep_list, total_attribute_list, potential_key):
+        l=[]
+        l.append(dep_list[0].table_name)
+        for att in potential_key:
+            l.append(att)
+        COAS=self.showCOAS2(l)
+        if(compareList(COAS, total_attribute_list)):
+            return True
+        return False
 
     def find_table_attribute(self, table):
         try:
@@ -351,16 +347,22 @@ class DataBase:
         return key_list
 
     def check3NF(self, table):
+        table_dep_list=self.extract_dep(table)
+        total_key=self.showKey(table)
+        sup_key=self.showSuperKey(total_key)
         if(self.checkBCNF(table) == True):
             return True
         else:
-            super_key_list=self.showSuperKey(table)
-            att_list = self.find_table_attribute(table)
-            for att in att_list:
-                if(att not in super_key_list):
+            print(sup_key)
+            for dep in table_dep_list:
+                cnt=0
+                for key in sup_key:
+                    if(dep.rhs not in key):
+                        cnt=cnt+1
+                if(cnt==len(sup_key)):
                     return False
-
             return True
+
 
 
     def showLCD2(self, table):
@@ -397,6 +399,8 @@ class DataBase:
 
 
     def showCOAS2(self, arg_tab):
+        # arg_tab is a list with minimum 2 objects,
+        # the first one is the table and rest of the list are the attributes set
         table=arg_tab[0]
         lhs_tab=arg_tab[1:]
         table_dep_list=self.extract_dep(table)
@@ -501,15 +505,20 @@ def not_member_of(depObject, depList):  # returns True if the dep is not in the 
     return True
 
 def detect(string_or_list_lhs, string_list):  # returns True if the lhs is in the string list
+    low_string_list=[]
+    for u in string_list:
+        low_string_list.append(u.lower())
     if(isinstance(string_or_list_lhs, list)):
-        lhs_list=string_or_list_lhs
+        lhs_list=[]
+        for s in string_or_list_lhs:
+            lhs_list.append(s.lower())
         for lhs in lhs_list:
-            if(lhs not in string_list):
+            if(lhs not in low_string_list):
                 return False
         return True
     else:
-        lhs_string=string_or_list_lhs
-        if(lhs_string in string_list):
+        lhs_string=string_or_list_lhs.lower()
+        if (lhs_string in low_string_list):
             return True
         else:
             return False

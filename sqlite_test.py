@@ -1,5 +1,6 @@
 import sqlite3
 
+# This file is just a SQLite testting file
 
 con = sqlite3.connect('putDataBaseHere/test.db')
 

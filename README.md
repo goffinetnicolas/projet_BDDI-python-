@@ -3,23 +3,28 @@
 Bienvenue dans le fichier README
 
 Voici les explications concernant ce programme. Ce programme est codé en Python par Nicolas GOFFINET et Maxime Renversez. Il gère les dépendances fonctionnelles des bases de données introduites dans le répertoire "putDataBaseHere".
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Lien du github: https://github.com/goffinetnicolas/projet_BDDI-python-
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteur de ligne de commande (les commandes doivent être executées sans les crochets):
 
  1. [help] ou [?] 
 
--Affiche les commandes programmées sur la console. "help" permet aussi de donner la documentation d'une commande si vous introduisez la commande ainsi: [help commande_name]
+-Affiche les commandes executables sur la console. "help" permet aussi de donner la documentation d'une commande si vous introduisez la commande ainsi: [help commande_name].
 
 
  2. [exit]
 
--Quitte le programme
+-Quitte le programme.
 
 
  3. [connect database_name.db] 
 
--Cette commande permet de se connecter à la base de donnée indiquée afin de pouvoir effectuer des  opérations sur celle-ci. Si aucune base de donnée n'est connectée, il est impossible d'effectuer des opérations
+-Cette commande permet de se connecter à la base de donnée indiquée afin de pouvoir effectuer des opérations sur celle-ci. Si aucune base de donnée n'est connectée, il est impossible d'effectuer des opérations.
 
 
  4. [disconnect database_name.db]
@@ -79,17 +84,17 @@ Voici un récapitulatif des commandes que l'on peut executer dans l'interpréteu
 
  15. [showKey table_name]
 
--Permet de calculer toutes les clés de la table indiquée
+-Permet de calculer toutes les clés possibles de la table indiquée.
 
 
  16. [showSuperKey]
 
--Permet de calculer toutes les super-clés présentes dans les clés
+-Permet de calculer toutes les super-clés présentes dans les clés.
 
 
  17. [checkBCNF table_name]
 
--Permet de savoir si la table est en BCNF
+-Permet de savoir si la table est en BCNF.
 
 
  18. [showBCNF table_name]

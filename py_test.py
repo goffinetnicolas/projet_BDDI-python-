@@ -2,6 +2,7 @@ import itertools
 
 from dep import Dep
 
+# This file tests if the implemented functions work correctly
 
 def test():
     dico = {"a": 1}
@@ -49,6 +50,6 @@ def compareList(list1, list2):
 
 
 
-a="a"
-c=["b","c","a"]
-print(a not in c)
+a='A'
+a=a.lower()
+print(a)

@@ -184,12 +184,7 @@ class DataBase:
                                     and line1 != line2)):
                                 not_satisfied.append(dep)
 
-        if (not_satisfied == []):
-            print("All the functional dependencies are satisfied")
-        else:
-            for dep in not_satisfied:
-                print("The functional dependency: [" + dep.table_name + ": " + dep.lhs_rep + " ---> " + dep.rhs +
-                      "] is not satisfied")
+        return not_satisfied
 
     def find_attribute_position(self, lhs, table):
 
@@ -561,14 +556,23 @@ class DataBase:
         print("Les doublons")            
         print(doublons)
 
-    def deleteUID2(self, table):
-
+    def check_redundant_dep(self, table):
+        table_dep_list = self.extract_dep(table)
+        redundant=[]
+        for dep1 in table_dep_list:
+            rmv=copy.deepcopy(table_dep_list)
+            rmv.remove(dep1)
+            T=list(dep1.lhs)
+            for dep2 in rmv:
+                if(detect(dep2.lhs, T)):
+                    T.append(dep2.rhs)
+                if(detect(dep1.rhs, T)):
+                    redundant.append(dep1)
+        return redundant
 
     def extract_dep(self, table):
         l = self.depTab
         table_dep_list = []
-        att_list = self.find_table_attribute(table)  # total attribute list of the table
-
         for dep in l:  # extract the functional dependencies linked to the table
             if (dep.table_name == table):
                 table_dep_list.append(dep)
@@ -578,10 +582,41 @@ class DataBase:
     def create3NF_dec(self, table, db_name):
 
         new_db = DataBase(db_name + ".db")
-        dep_table_list = []
-        for dep in self.depTab:
-            if (dep.table_name == table):
-                dep_table_list.append(dep)
+        redundant = self.check_redundant_dep(table)
+        for dep in redundant:
+            self.removeDep(dep)
+        table_dep_list = self.extract_dep(table)
+        a=0
+        for dep in table_dep_list:
+            b = str(a)
+            l=[]
+            if(isinstance(dep.lhs, list)):
+                for lhs in dep.lhs:
+                    l.append(lhs)
+            else:
+                l.append(dep.lhs)
+            l.append(dep.rhs)
+            print(l)
+
+            new_db.command.execute("""CREATE TABLE dep"""+b+""" ("""+l[0]+""")""")
+            d=1
+            while(d != len(l)):
+                new_db.command.execute("""ALTER TABLE dep"""+b+""" ADD """+l[d]+""" VARCHAR""")
+                d=d+1
+            a=a+1
+            new_db.connection.commit()
+
+        for dep in table_dep_list:
+            new_db.depTab.append(dep)
+            if(isinstance(dep.lhs, list)):
+                lhs_string=extract(dep.lhs)
+                new_db.command.execute("INSERT INTO FuncDep VALUES (:table_name, :lhs, :rhs)",
+                                    (dep.table_name, lhs_string, dep.rhs))
+                new_db.connection.commit()
+            else:
+                new_db.command.execute("INSERT INTO FuncDep VALUES (:table_name, :lhs, :rhs)",
+                                       (dep.table_name, dep.lhs, dep.rhs))
+                new_db.connection.commit()
 
 
     def close(self):

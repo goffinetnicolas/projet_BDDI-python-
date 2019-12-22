@@ -149,7 +149,13 @@ class Shell(cmd.Cmd):
             print("Error, you must enter a table name")
 
         else:
-            self.db_object.showNSD2(arg)
+            not_satisfied=self.db_object.showNSD2(arg)
+            if (not_satisfied == []):
+                print("All the functional dependencies are satisfied")
+            else:
+                for dep in not_satisfied:
+                    print("The functional dependency: [" + dep.table_name + ": " + dep.lhs_rep + " ---> " + dep.rhs +
+                          "] is not satisfied")
         print("")  # space
 
     #recopier le code de mon gsm pour LCD 
@@ -264,7 +270,19 @@ class Shell(cmd.Cmd):
             print("Error, you must enter a table name and an attribute")
 
         else:
-            self.db_object.deleteUID2(table)
+            redundant=self.db_object.check_redundant_dep(table)
+            if(redundant==[]):
+                print("No unnecessary or inconsistent functional dependency found")
+            else:
+                print("Unnecessary or inconsistent functional dependency list:")
+                for dep in redundant:
+                    print(dep.__str__())
+                print("Do you want to delete them ? (y/n) ")
+                a=input()
+                if(a=="y"):
+                    for dep in redundant:
+                        self.db_object.removeDep(dep)
+
         print("")  # space
 
     def do_checkBCNF(self, arg):
@@ -318,6 +336,7 @@ class Shell(cmd.Cmd):
                         print("Please, enter the data base file name that you want to create")
                         user_db_name = input()
                         self.db_object.create3NF_dec(table, user_db_name)
+                        print("table created")
                 else:
                     print(table + " is not in 3NF and does not satisfy the current functional dependencies")
 

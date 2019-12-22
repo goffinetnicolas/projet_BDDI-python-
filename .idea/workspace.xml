@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b970664-aa07-4a49-9b43-0c92819dd77e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/putDataBaseHere/test2.db" beforeDir="false" afterPath="$PROJECT_DIR$/putDataBaseHere/test2.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,11 +358,17 @@
       <option name="project" value="LOCAL" />
       <updated>1577026696704</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="uploading README.md">
+      <created>1577030523630</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1577030523630</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding dep class, db class and functions" />
     <MESSAGE value="fixing errors, working on dep" />
     <MESSAGE value="adding comments in code" />
     <MESSAGE value="adding removeDep function and showDep function" />
@@ -389,18 +393,19 @@
     <MESSAGE value="fixing COAS" />
     <MESSAGE value="fixing LCD2" />
     <MESSAGE value="upgrading 3NF decompositions" />
-    <option name="LAST_COMMIT_MESSAGE" value="upgrading 3NF decompositions" />
+    <MESSAGE value="uploading README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="uploading README.md" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576926970578">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576926970578" />
-    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1577026696128">
+    <state x="614" y="114" key="CommitChangelistDialog2" timestamp="1577030523093">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="99" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1576678108539" />
-    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1577026696128" />
+    <state x="614" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1577030523093" />
     <state x="184" y="86" key="DiffContextDialog" timestamp="1576237166195">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

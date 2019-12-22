@@ -196,6 +196,10 @@ class Shell(cmd.Cmd):
         print("")  # space
 
     def do_showCOAS2(self, arg):
+
+        """ Compute and show the closure of the attribute of the table indicated
+                The user type 'showCOAS table_name attribute_name' """
+
         print("")  # space
 
         if (self.db_object == None):
@@ -303,6 +307,9 @@ class Shell(cmd.Cmd):
         print("")  # space
 
     def do_showBCNF(self, arg):
+
+        """ Compute and show functional dependencies which prevents the table from being in BCNF """
+
         table=arg
         if (table == ""):
             print("Error, you have to type a table as argument")
@@ -318,7 +325,9 @@ class Shell(cmd.Cmd):
 
 
     def do_check3NF(self, arg):
-        """ Check if the data base file in in 3NF """
+
+        """ Check if the data base file in in 3NF and proposes to
+        create a new database if the functional dependencies are respected """
 
         table = arg
         if (table == ""):
@@ -380,6 +389,9 @@ class Shell(cmd.Cmd):
         print("")  # space
 
     def do_removeTableDep(self, arg):
+
+        """ Remove the functional dependencies linked to the table """
+
         print("")  # space
         table = arg
         if (table == ""):
@@ -396,6 +408,9 @@ class Shell(cmd.Cmd):
         print("")  # space
 
     def do_removeAllDep(self, arg):
+
+        """ Remove all functional dependency in the data base"""
+
         print("")  # space
         remove=[]
         for dep in self.db_object.depTab:

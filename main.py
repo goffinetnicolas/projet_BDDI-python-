@@ -302,7 +302,7 @@ class Shell(cmd.Cmd):
             print(table," is not in BCNF")
         print("")  # space
 
-    def do_showWrongDepBCNF(self, arg):
+    def do_showBCNF(self, arg):
         table=arg
         if (table == ""):
             print("Error, you have to type a table as argument")
